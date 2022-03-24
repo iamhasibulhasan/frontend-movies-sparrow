@@ -22,4 +22,14 @@
 https://example.com/
 ```
 
+### Using Tech
+```
+1.  React JS
+2.  React Router v5.2.0
+3.  React Bootstrap
+4.  Sweet Alert 2
+5.  React Font Awesome
+6.  
+```
+
 ### All rights reserved by [Hasibul Hasan](https://hasibul-hasan.netlify.app/)
