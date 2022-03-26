@@ -1,0 +1,93 @@
+/* 
+    ==================================================================
+                            Utilities
+    ==================================================================
+*/
+
+
+
+
+/* 
+    ==================================================================
+                            Main CSS
+    ==================================================================
+*/
+.header-section {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.102);
+    padding: 21px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    transition: background-color 0.5s;
+}
+
+.sticky {
+    background-color: #001232;
+}
+
+.bg-light {
+    opacity: 1;
+    background-color: transparent !important;
+}
+
+.header {
+    font-family: "Open Sans", sans-serif;
+}
+
+.nav-link {
+    color: #e9eeff !important;
+}
+
+.nav-link-header {
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 5px;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+
+.header-link {
+    align-items: center;
+    gap: 3px;
+
+}
+
+.join-us-btn {
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+    padding: 10px 49px;
+    font-weight: 600;
+    border-radius: 25px;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    transition: 0.3s;
+}
+
+
+
+.join-us-btn:hover {
+    box-shadow: 0px 10px 15px 0px rgb(59 55 188 / 50%);
+    color: white;
+}
+
+
+/* 
+    ==================================================================
+                            Responsive CSS
+    ==================================================================
+*/
+
+@media only screen and (max-width: 600px) {
+    .header-link {
+        gap: 3px;
+        align-items: initial;
+
+    }
+
+    .join-us-btn {
+        text-align: center;
+    }
+}
