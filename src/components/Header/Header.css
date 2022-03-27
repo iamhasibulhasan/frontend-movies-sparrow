@@ -55,6 +55,14 @@
 
 }
 
+.dropdown-item:focus,
+.dropdown-item:hover {
+    transition: all ease 0.3s;
+    padding-left: 10px;
+    color: #31d7a9;
+    background-color: white;
+}
+
 .join-us-btn {
     background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
     padding: 10px 49px;

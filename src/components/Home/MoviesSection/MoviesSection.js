@@ -6,7 +6,7 @@ const MoviesSection = () => {
         <section className="movie-section padding-top padding-bottom bg-two">
             <div className="container">
                 <div className="row flex-wrap-reverse justify-content-center">
-                    <div className="col-lg-3 col-sm-10  mt-50 mt-lg-0">
+                    <div className="col-lg-3 col-sm-10  mt-50 mt-lg-0 my-5">
                         <div className="widget-1 widget-facility">
                             <div className="widget-1-body">
                                 <ul>
@@ -69,7 +69,7 @@ const MoviesSection = () => {
                                 </ul>
                             </div>
                         </div>
-                        <div className="widget-1 widget-banner">
+                        <div className="widget-1 widget-banner last-banner">
                             <div className="widget-1-body">
                                 <a href="#0">
                                     <img src="https://i.ibb.co/b7hpZth/banner02.jpg" alt="banner" />

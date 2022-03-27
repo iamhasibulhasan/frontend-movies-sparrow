@@ -316,4 +316,30 @@ h6 {
         line-height: 60px;
         margin-top: -13px;
     }
+
+
+}
+
+@media (max-width: 575px) {
+
+    .sports-grid,
+    .event-grid,
+    .movie-grid {
+        max-width: 280px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .widget-1.widget-banner .widget-1-body {
+        margin-top: 50px;
+    }
+
+    .widget-1 .title {
+        margin-top: 50px;
+    }
+
+    .last-banner {
+        margin-bottom: -80px;
+    }
+
 }
