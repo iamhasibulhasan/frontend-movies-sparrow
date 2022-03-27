@@ -7,18 +7,30 @@ import NotFound from './components/NotFound/NotFound';
 import Header from "./components/Header/Header";
 import Home from './components/Home/Home/Home';
 import Footer from "./components/Footer/Footer";
+import Login from "./components/Auth/Login/Login";
+import JoinUs from "./components/Auth/JoinUs/JoinUs";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
-        <Header></Header>
+
         <Switch>
           <Route exact path='/'>
+            <Header></Header>
             <Home></Home>
+            <Footer></Footer>
           </Route>
           <Route path='/home'>
+            <Header></Header>
             <Home></Home>
+            <Footer></Footer>
+          </Route>
+          <Route path='/join-us'>
+            <JoinUs></JoinUs>
+          </Route>
+          <Route path='/login'>
+            <Login></Login>
           </Route>
 
 
@@ -26,7 +38,7 @@ function App() {
             <NotFound></NotFound>
           </Route>
         </Switch>
-        <Footer></Footer>
+
       </Router>
     </AuthProvider>
   );
