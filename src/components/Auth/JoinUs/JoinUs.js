@@ -11,7 +11,7 @@ const JoinUs = () => {
                     <div className="account-area">
                         <div className="section-header-3">
                             <span className="cate">welcome</span>
-                            <h2 className="title">to Boleto </h2>
+                            <h2 className="title">to Sparrow </h2>
                         </div>
                         <form className="account-form">
                             <div className="form-group">
