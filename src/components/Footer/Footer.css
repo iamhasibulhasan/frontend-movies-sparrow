@@ -1,0 +1,227 @@
+/* 
+    ==================================================================
+                            Utilities
+    ==================================================================
+*/
+
+
+/* 
+    ==================================================================
+                            Main CSS
+    ==================================================================
+*/
+.footer-section {
+    position: relative;
+}
+
+
+.footer-section::before {
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 80px;
+    mask-image: url(https://i.ibb.co/JFSZc1T/footer-shape.png);
+    background: #0a1e5e;
+    position: absolute;
+    content: '';
+}
+
+.newslater-container::after {
+    background-image: -webkit-linear-gradient(0deg, #7400ba 0%, #0f5ae0 100%);
+    opacity: 0.8;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    content: '';
+}
+
+.newslater-container {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.newslater-wrapper {
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+.newslater-container * {
+    position: relative;
+    z-index: 1;
+}
+
+.newslater-wrapper .cate {
+    color: #31d7a9;
+    margin-bottom: 23px;
+}
+
+.newslater-wrapper .title {
+    margin-bottom: 50px;
+}
+
+.newslater-wrapper .title,
+.newslater-wrapper .cate {
+    text-transform: uppercase;
+}
+
+.newslater-form {
+    margin-bottom: 34px;
+}
+
+.newslater-form input {
+    height: 50px;
+    padding-right: 160px;
+    color: #99abe2;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 25px;
+    padding-left: 20px;
+    box-shadow: 0px 3px 10px 0px rgb(0 0 0 / 10%);
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: transparent;
+
+    width: 100%;
+    outline: none;
+}
+
+.newslater-form button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+    box-shadow: 0px 10px 15px 0px rgb(59 55 188 / 50%);
+    width: auto;
+    padding: 11px 40px;
+    border-radius: 25px;
+    border: none;
+    color: white;
+    text-transform: capitalize;
+}
+
+p:last-child {
+    margin-bottom: -8px !important;
+}
+
+.footer-top>* {
+    padding-bottom: 20px;
+    margin-bottom: 0;
+}
+
+.footer-top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+
+}
+
+.footer-top {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-top,
+.footer-bottom-area {
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+}
+
+.social-icons {
+    margin: -7.5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.social-icons li {
+    padding: 7.5px;
+}
+
+.social-icons li a:hover {
+    transition: all 0.5s;
+    background: #31d7a9;
+    border-color: #31d7a9;
+}
+
+.social-icons li a {
+    width: 36px;
+    height: 36px;
+    line-height: 29px;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    font-size: 14px;
+    display: inline-block;
+}
+
+
+
+.footer-bottom-area {
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+.footer-bottom .left {
+    margin-bottom: 25px;
+}
+
+.footer-bottom {
+    margin-top: 15px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+.footer-bottom .links {
+    margin: 0 -15px;
+    margin-bottom: 25px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-bottom .links li {
+    padding: 0 15px;
+}
+
+.footer-bottom .links li a {
+    color: #dbe2fb;
+}
+
+.footer-bottom p a {
+    color: #31d7a9;
+    cursor: pointer;
+}
+
+
+/* 
+    ==================================================================
+                            Responsive CSS
+    ==================================================================
+*/
+
+@media (min-width: 992px) {
+    .footer-section::before {
+        top: 120px;
+    }
+}
+
+@media (min-width: 576px) {
+    h5 {
+        font-size: 24px;
+        margin-top: -8px;
+    }
+
+    h3 {
+        font-size: 36px;
+        margin-top: -10px;
+    }
+}

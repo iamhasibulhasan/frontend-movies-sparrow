@@ -55,7 +55,7 @@ const TicketSearch = () => {
                                     </div>
                                     <span className="type">city</span>
 
-                                    <select className="nice-select select-bar" tabindex="0">
+                                    <select className="nice-select select-bar" tabIndex="0">
 
 
 
@@ -76,7 +76,7 @@ const TicketSearch = () => {
                                     </div>
                                     <span className="type">date</span>
 
-                                    <select className="nice-select select-bar" tabindex="0">
+                                    <select className="nice-select select-bar" tabIndex="0">
 
 
 
@@ -99,7 +99,7 @@ const TicketSearch = () => {
                                     <span className="type">cinema</span>
 
 
-                                    <select className="nice-select select-bar" tabindex="0">
+                                    <select className="nice-select select-bar" tabIndex="0">
 
 
 

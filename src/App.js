@@ -6,6 +6,7 @@ import AuthProvider from "./contexts/AuthProvider";
 import NotFound from './components/NotFound/NotFound';
 import Header from "./components/Header/Header";
 import Home from './components/Home/Home/Home';
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -25,7 +26,7 @@ function App() {
             <NotFound></NotFound>
           </Route>
         </Switch>
-
+        <Footer></Footer>
       </Router>
     </AuthProvider>
   );
