@@ -16,7 +16,7 @@ const Footer = () => {
                 <div className="container">
                     <div className="newslater-container bg_img" data-background="https://i.ibb.co/Fh3QW1F/newslater-bg01.jpg" style={{ backgroundImage: `url(${'https://i.ibb.co/Fh3QW1F/newslater-bg01.jpg'})` }}>
                         <div className="newslater-wrapper">
-                            <h5 className="cate">subscribe to Boleto </h5>
+                            <h5 className="cate">subscribe to Sparrow </h5>
                             <h3 className="title">to get exclusive benifits</h3>
                             <form className="newslater-form">
                                 <input type="text" placeholder="Your Email Address" />
