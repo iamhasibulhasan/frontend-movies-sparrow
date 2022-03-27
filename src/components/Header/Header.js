@@ -17,12 +17,12 @@ const Header = () => {
 
     return (
         <div id='header' className="header-section">
-            <Navbar bg="light" expand="lg" className='header p-0' >
+            <Navbar bg="light" expand="lg" className='header p-0' variant="dark" >
                 <Container>
                     <Navbar.Brand as={Link} to="/">
                         <img src="https://i.ibb.co/z6BMYGx/logo-sparrow.png" alt="" />
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" className='navbar-btn' />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="ms-auto header-link">
                             <Nav.Link as={Link} className="nav-link-header" to="/">Home</Nav.Link>

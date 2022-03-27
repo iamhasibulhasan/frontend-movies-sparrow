@@ -90,4 +90,13 @@
     .join-us-btn {
         text-align: center;
     }
+
+    .navbar-btn {
+        border: none;
+    }
+
+    .navbar-btn:focus {
+        box-shadow: none;
+
+    }
 }
