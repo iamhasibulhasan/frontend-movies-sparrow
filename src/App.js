@@ -1,4 +1,6 @@
 import React from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import './App.css';
@@ -9,6 +11,7 @@ import Home from './components/Home/Home/Home';
 import Footer from "./components/Footer/Footer";
 import Login from "./components/Auth/Login/Login";
 import JoinUs from "./components/Auth/JoinUs/JoinUs";
+import AboutUs from "./components/AboutUs/AboutUs";
 
 function App() {
   return (
@@ -32,6 +35,12 @@ function App() {
           <Route path='/login'>
             <Login></Login>
           </Route>
+          <Route path='/about-us'>
+            <Header></Header>
+            <AboutUs></AboutUs>
+            <Footer></Footer>
+          </Route>
+
 
 
           <Route path='*'>
