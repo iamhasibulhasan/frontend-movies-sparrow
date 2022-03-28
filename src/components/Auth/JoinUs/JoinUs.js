@@ -15,17 +15,17 @@ const JoinUs = () => {
                         </div>
                         <form className="account-form">
                             <div className="form-group">
-                                <label for="email1">Email<span>*</span></label>
+                                <label htmlFor="email1">Email<span>*</span></label>
                                 <input type="text" placeholder="Enter Your Email" id="email1" required="" />
                             </div>
                             <div className="form-group">
-                                <label for="pass1">Password<span>*</span></label>
+                                <label htmlFor="pass1">Password<span>*</span></label>
                                 <input type="password" placeholder="Password" id="pass1" required="" />
                             </div>
                             <div className="form-group checkgroup">
 
                                 <input type="checkbox" id="bal" required="" checked="" />
-                                <label for="bal">I agree to the <a href="#0">Terms, Privacy Policy</a> and <a href="#0">Fees</a></label>
+                                <label htmlFor="bal">I agree to the <a href="#0">Terms, Privacy Policy</a> and <a href="#0">Fees</a></label>
                             </div>
                             <div className="form-group text-center">
                                 <input type="submit" value="Sign Up" />

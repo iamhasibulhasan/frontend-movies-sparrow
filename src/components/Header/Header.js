@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
     window.onscroll = () => {
         let element = document.getElementById("header");
-        var sticky = element.offsetTop;
+        let sticky = element.offsetTop;
         element.classList.add("mystyle");
         if (window.pageYOffset > sticky) {
             element.classList.add("sticky");
