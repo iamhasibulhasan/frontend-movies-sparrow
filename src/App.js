@@ -14,6 +14,7 @@ import JoinUs from "./components/Auth/JoinUs/JoinUs";
 import AboutUs from "./components/AboutUs/AboutUs";
 import Blogs from './components/Blogs/Blogs';
 import Movies from "./components/Movies/Movies";
+import MoviesDetails from "./components/MoviesDetails/MoviesDetails";
 
 function App() {
   return (
@@ -50,6 +51,11 @@ function App() {
           <Route path='/movies'>
             <Header></Header>
             <Movies></Movies>
+            <Footer></Footer>
+          </Route>
+          <Route path='/movies-details'>
+            <Header></Header>
+            <MoviesDetails></MoviesDetails>
             <Footer></Footer>
           </Route>
 
