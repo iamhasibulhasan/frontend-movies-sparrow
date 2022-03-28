@@ -55,12 +55,17 @@
 
 }
 
+.dropdown-item {
+    -webkit-transition: all ease 0.5s;
+}
+
 .dropdown-item:focus,
 .dropdown-item:hover {
-    transition: all ease 0.3s;
+    transition: all ease 0.5s;
     padding-left: 10px;
     color: #31d7a9;
     background-color: white;
+    -webkit-transition: all ease 0.5s;
 }
 
 .join-us-btn {
