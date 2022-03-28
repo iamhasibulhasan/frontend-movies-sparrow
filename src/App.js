@@ -12,6 +12,7 @@ import Footer from "./components/Footer/Footer";
 import Login from "./components/Auth/Login/Login";
 import JoinUs from "./components/Auth/JoinUs/JoinUs";
 import AboutUs from "./components/AboutUs/AboutUs";
+import Blogs from './components/Blogs/Blogs';
 
 function App() {
   return (
@@ -38,6 +39,11 @@ function App() {
           <Route path='/about-us'>
             <Header></Header>
             <AboutUs></AboutUs>
+            <Footer></Footer>
+          </Route>
+          <Route path='/blogs'>
+            <Header></Header>
+            <Blogs></Blogs>
             <Footer></Footer>
           </Route>
 
