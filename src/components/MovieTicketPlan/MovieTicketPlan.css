@@ -1,0 +1,233 @@
+/* 
+    ==================================================================
+                            Utilities
+    ==================================================================
+*/
+.bg-five {
+    background-color: #01173f;
+}
+
+
+
+/* 
+    ==================================================================
+                            Main CSS
+    ==================================================================
+*/
+
+.details-banner.hero-area .details-banner-wrapper .details-banner-content {
+    text-align: center;
+}
+
+.details-banner.hero-area .details-banner-wrapper .details-banner-content .title {
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-size: 30px;
+}
+
+.seat-plan-wrapper li {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    border-bottom: 1px solid #11326f;
+}
+
+.seat-plan-wrapper li .movie-name {
+    padding: 30px;
+    justify-content: space-between;
+    width: 45%;
+    border-right: 1px solid #11326f;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.seat-plan-wrapper li .movie-name .icons {
+    color: #9aace5;
+}
+
+.seat-plan-wrapper li .movie-name .icons .heart-i {
+    display: block;
+    -webkit-transition: all ease 0.5s;
+}
+
+.seat-plan-wrapper li:hover .movie-name .icons .heart-i {
+    color: red;
+}
+
+
+
+.seat-plan-wrapper li .movie-name .name {
+    margin-right: auto;
+    margin-left: 20px;
+    color: #dbe2fb;
+    text-transform: uppercase;
+}
+
+.seat-plan-wrapper li .movie-name .location-icon {
+    background-color: #17305f;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 50%;
+    color: #9aace5;
+    -webkit-transition: all ease 0.5s;
+}
+
+.seat-plan-wrapper li:hover .movie-name .location-icon {
+    background: #31d7a9;
+    color: #ffffff;
+}
+
+.seat-plan-wrapper li .movie-schedule {
+    width: calc(100% - 45%);
+    padding: 30px;
+    justify-content: space-between;
+    margin: -5px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.seat-plan-wrapper li .movie-schedule .item {
+    color: #ffffff;
+    padding: 5px;
+    width: 70px;
+    background: #162f5f;
+    position: relative;
+    background-image: url(http://pixner.net/boleto/demo/assets/css/img/movie-seat.png);
+    -webkit-mask-position: center center;
+    text-align: center;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    cursor: pointer;
+    transition: all ease 0.3s;
+    margin: 5px;
+}
+
+.seat-plan-wrapper li .movie-schedule .item:hover {
+    background: #31d7a9;
+}
+
+
+/* popup display */
+
+
+.window-warning {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    padding: 30px 15px;
+    z-index: 9999;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    display: none;
+    flex-wrap: wrap;
+}
+
+.window-warning-active {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+    padding: 30px 15px;
+    z-index: 9999;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.window-warning-active .lay {
+    position: fixed;
+    background: rgba(10, 30, 94, 0.9);
+    top: 0;
+    width: 100%;
+    height: 100%;
+    left: 0;
+}
+
+.window-warning-active .warning-item {
+    position: relative;
+    z-index: 1;
+    border-radius: 20px;
+    background: #ffffff;
+    width: 100%;
+    max-width: 560px;
+    padding: 60px 15px;
+    text-align: center;
+}
+
+.window-warning-active .warning-item .subtitle {
+    color: #0a1e5e;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.window-warning-active .warning-item .title {
+    color: #31d7a9;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.window-warning-active .warning-item .thumb {
+    width: 192px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+}
+
+.window-warning-active .warning-item .thumb img {
+    max-width: 100%;
+}
+
+.window-warning-active .warning-item .seatPlanButton {
+    width: 200px;
+    font-weight: 600;
+    padding: 11px 35px;
+    -webkit-box-shadow: 0px 10px 15px 0px rgb(59 55 188 / 50%);
+    box-shadow: 0px 10px 15px 0px rgb(59 55 188 / 50%);
+}
+
+.window-warning-active .warning-item .seatPlanButton .right-arrow {
+    margin-left: 5px;
+}
+
+.window-warning-active .modal-close {
+    color: #01173f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+    ==================================================================
+                            Responsive CSS
+    ==================================================================
+*/
+@media (min-width: 576px) {
+    .details-banner.hero-area .details-banner-wrapper .details-banner-content .title {
+        font-size: 60px;
+    }
+}

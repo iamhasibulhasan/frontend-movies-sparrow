@@ -15,6 +15,7 @@ import AboutUs from "./components/AboutUs/AboutUs";
 import Blogs from './components/Blogs/Blogs';
 import Movies from "./components/Movies/Movies";
 import MoviesDetails from "./components/MoviesDetails/MoviesDetails";
+import MovieTicketPlan from "./components/MovieTicketPlan/MovieTicketPlan";
 
 function App() {
   return (
@@ -56,6 +57,11 @@ function App() {
           <Route path='/movies-details'>
             <Header></Header>
             <MoviesDetails></MoviesDetails>
+            <Footer></Footer>
+          </Route>
+          <Route path='/movie-ticket-plan'>
+            <Header></Header>
+            <MovieTicketPlan></MovieTicketPlan>
             <Footer></Footer>
           </Route>
 
