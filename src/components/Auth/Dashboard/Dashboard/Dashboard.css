@@ -1,0 +1,59 @@
+/* 
+============================================
+                Utilities
+============================================
+*/
+
+/* 
+============================================
+                Main CSS
+============================================
+*/
+
+.dashboard-sidebar {
+    background-color: #032055;
+    height: 100vh;
+    padding: 0 12px 0px 25px;
+}
+
+.dashboard-sidebar ul {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.dashboard-sidebar .active {
+    background-color: #001232;
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 14px #f50b16
+}
+
+.dashboard-sidebar ul a li {
+
+    color: white;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    -webkit-transition: all ease 0.5s;
+
+}
+
+.dashboard-sidebar ul a:hover {
+    background-color: #001232;
+    color: white;
+    border-radius: 5px;
+    transition: all ease 0.5s;
+    box-shadow: 0px 0px 14px #f50b16
+}
+
+
+/* 
+============================================
+                Responsive CSS
+============================================
+*/

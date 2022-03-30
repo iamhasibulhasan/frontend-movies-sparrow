@@ -18,6 +18,7 @@ import MoviesDetails from "./components/MoviesDetails/MoviesDetails";
 import MovieTicketPlan from "./components/MovieTicketPlan/MovieTicketPlan";
 import MovieSeatPlan from "./components/MovieSeatPlan/MovieSeatPlan";
 import CheckOut from './components/Auth/CheckOut/CheckOut';
+import Dashboard from './components/Auth/Dashboard/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -75,6 +76,9 @@ function App() {
             <Header></Header>
             <CheckOut></CheckOut>
             <Footer></Footer>
+          </Route>
+          <Route path='/dashboard'>
+            <Dashboard></Dashboard>
           </Route>
 
 
