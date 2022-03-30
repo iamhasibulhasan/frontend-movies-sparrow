@@ -231,3 +231,25 @@
         font-size: 60px;
     }
 }
+
+@media (max-width: 767px) {
+    ::-webkit-scrollbar {
+        width: 1px;
+    }
+
+    .screen-wrapper {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .screen-wrapper .seat-area {
+        width: 800px;
+        margin-bottom: 10px;
+    }
+
+    .proceed-book {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-top: 80px;
+    }
+}

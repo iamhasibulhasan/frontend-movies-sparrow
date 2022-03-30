@@ -28,3 +28,14 @@ body {
 ::-webkit-scrollbar-thumb {
     background: black;
 }
+
+/* 
+    ==================================================================
+                            Responsive CSS
+    ==================================================================
+*/
+@media (max-width: 767px) {
+    .screen-wrapper::-webkit-scrollbar {
+        height: 3px;
+    }
+}
