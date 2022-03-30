@@ -1,0 +1,440 @@
+/* 
+    ==================================================================
+                            Utilities
+    ==================================================================
+*/
+
+
+
+/* 
+    ==================================================================
+                            Main CSS
+    ==================================================================
+*/
+.movie-facility {
+    overflow: hidden;
+}
+
+.checkout-widget {
+    padding: 30px;
+    margin-bottom: 30px;
+    background: #032055;
+}
+
+.checkout-widget .title-area {
+    margin-bottom: 25px;
+}
+
+.checkout-widget .title-area,
+.checkout-widget .sign-in-area {
+    width: 100%;
+}
+
+.checkout-widget .title-area .title {
+    margin-bottom: 20px;
+}
+
+.checkout-widget p {
+    color: #9aace5;
+}
+
+.checkout-widget .sign-in-area {
+    color: #ffffff;
+}
+
+.checkout-widget .sign-in-area .signin-user {
+    display: inline-block;
+    line-height: 30px;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    background: -webkit-linear-gradient(169deg, #5560ff 0%, #ff4343 100%);
+    border-radius: 50%;
+    font-size: 14px;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+/* Checkout contact form */
+.checkout-widget.checkout-contact .title {
+    border-bottom: 1px dashed #11326f;
+    padding-bottom: 23px;
+    margin-bottom: 20px;
+}
+
+.checkout-contact-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: -30px;
+}
+
+.checkout-contact-form .form-group {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.checkout-contact-form .form-group input {
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #11326f;
+    border-radius: 0;
+    padding: 0;
+    font-size: 14px;
+    background: transparent;
+    width: 100%;
+    color: #dbe2fb;
+    outline: none;
+    overflow: visible;
+}
+
+.checkout-contact-form .form-group input[type="submit"] {
+    width: auto;
+    padding: 0 40px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+}
+
+/* Payment section */
+.checkout-widget .payment-option {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -15px;
+    margin-top: 5px;
+    margin-bottom: 25px;
+}
+
+.checkout-widget .payment-option li {
+    padding: 15px;
+}
+
+.checkout-widget .payment-option li.active a {
+    border-color: #4441e7;
+    border-width: 2px;
+    position: relative;
+}
+
+.checkout-widget .payment-option li a {
+    width: 90px;
+    border-radius: 10px;
+    border: 1px solid #11326f;
+    text-align: center;
+    padding: 20px 10px 18px;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.checkout-widget .payment-option li.active a::before {
+    background-color: #032055;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    top: -20px;
+    right: -20px;
+    position: absolute;
+    content: '';
+}
+
+.checkout-widget .payment-option li a img {
+    max-width: 100%;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+
+.checkout-widget .payment-option li a span {
+    font-size: 12px;
+    text-transform: capitalize;
+    display: block;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.checkout-widget .payment-option li.active a::after {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: -15px;
+    right: -15px;
+    background: url(https://i.ibb.co/R4jCVch/check.png) no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    content: '';
+}
+
+.checkout-widget.checkout-card .subtitle {
+    margin-bottom: 14px;
+}
+
+.checkout-widget.checkout-card .payment-card-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: -14px;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group {
+    position: relative;
+    margin-bottom: 14px;
+    width: 100%;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group input {
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid #11326f;
+    background: transparent;
+    padding-left: 10px;
+    color: #dbe2fb;
+    width: 100%;
+    overflow: visible;
+    outline: none;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group input {
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group input {
+    height: 60px;
+    border-radius: 10px;
+    border: 1px solid #11326f;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group label {
+    width: calc(100% - 30px);
+    padding-left: 20px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group label::before {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    top: 12px;
+    left: 5px;
+    border: 2px solid #4441e7;
+    position: absolute;
+    content: '';
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group label .title {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 2px;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group label .info {
+    font-size: 14px;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group input:checked~label::after {
+    display: block;
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group.check-group label::after {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    top: 7px;
+    left: 0;
+    background: url(https://i.ibb.co/R4jCVch/check.png) no-repeat center center;
+    background-size: cover;
+    display: none;
+    position: absolute;
+    content: '';
+}
+
+.checkout-widget.checkout-card .payment-card-form .form-group input[type="submit"] {
+    height: 50px;
+    width: auto;
+    padding: 0 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    border: none;
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+}
+
+.checkout-widget.checkout-card .notice {
+    margin-top: 18px;
+    font-size: 14px;
+    display: block;
+}
+
+.checkout-widget p {
+    color: #9aace5;
+}
+
+/* booking summery */
+
+
+.booking-summery {
+    padding: 30px;
+    border: 1px solid #11326f;
+    border-bottom-style: dashed;
+    padding-bottom: 10px;
+    margin-top: 60px;
+}
+
+.booking-summery .title {
+    text-align: center;
+    border-bottom: 1px dashed #11326f;
+    padding-bottom: 23px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.booking-summery ul {
+    border-bottom: 1px dashed #11326f;
+}
+
+.booking-summery ul li:first-child {
+    margin-top: 30px;
+}
+
+.booking-summery ul li {
+    padding: 0;
+    margin-bottom: 30px;
+}
+
+.booking-summery ul li .subtitle {
+    text-transform: uppercase;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 7px;
+}
+
+.booking-summery ul li .info:last-child {
+    margin-bottom: -14px;
+}
+
+.booking-summery ul li .info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #9aace5;
+}
+
+
+
+
+.side-shape {
+    position: relative;
+}
+
+.side-shape::before {
+    right: -56px;
+}
+
+.side-shape::after {
+    left: -56px;
+}
+
+.side-shape::after,
+.side-shape::before {
+    width: 48px;
+    height: 48px;
+    background-color: #001232;
+    border-radius: 50%;
+    top: -48px;
+    position: absolute;
+    content: '';
+}
+
+
+.proceed-area {
+    background: #05245c;
+    padding: 30px;
+}
+
+.proceed-area .subtitle {
+    text-transform: uppercase;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 23px;
+}
+
+/* 
+    ==================================================================
+                            Responsive CSS
+    ==================================================================
+*/
+
+@media (min-width: 992px) {
+    .booking-summery {
+        margin-top: 0;
+    }
+}
+
+
+@media (min-width: 768px) {
+    .checkout-widget .title-area {
+        width: calc(100% - 100px);
+        margin-bottom: 0;
+    }
+
+    .checkout-widget .title-area .title {
+        margin-bottom: 23px;
+    }
+
+    .checkout-widget .sign-in-area {
+        width: 100px;
+    }
+}
+
+@media (min-width: 576px) {
+    .checkout-widget.checkout-contact .title {
+        margin-bottom: 30px;
+    }
+
+    .checkout-contact-form .form-group {
+        width: calc(50% - 15px);
+
+    }
+
+    .checkout-widget .payment-option {
+        margin-bottom: 40px;
+    }
+
+    .checkout-widget.checkout-card .subtitle {
+        margin-bottom: 24px;
+    }
+
+    .checkout-widget.checkout-card .payment-card-form .form-group {
+        width: calc(50% - 15px);
+    }
+
+    .booking-summery .title {
+        font-size: 28px;
+        margin-top: -9px;
+        margin-bottom: 40px;
+    }
+
+
+
+
+}

@@ -16,6 +16,8 @@ import Blogs from './components/Blogs/Blogs';
 import Movies from "./components/Movies/Movies";
 import MoviesDetails from "./components/MoviesDetails/MoviesDetails";
 import MovieTicketPlan from "./components/MovieTicketPlan/MovieTicketPlan";
+import MovieSeatPlan from "./components/MovieSeatPlan/MovieSeatPlan";
+import CheckOut from './components/Auth/CheckOut/CheckOut';
 
 function App() {
   return (
@@ -62,6 +64,16 @@ function App() {
           <Route path='/movie-ticket-plan'>
             <Header></Header>
             <MovieTicketPlan></MovieTicketPlan>
+            <Footer></Footer>
+          </Route>
+          <Route path='/movie-seat-plan'>
+            <Header></Header>
+            <MovieSeatPlan></MovieSeatPlan>
+            <Footer></Footer>
+          </Route>
+          <Route path='/checkout'>
+            <Header></Header>
+            <CheckOut></CheckOut>
             <Footer></Footer>
           </Route>
 

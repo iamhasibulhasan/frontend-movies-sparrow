@@ -24,6 +24,7 @@
     text-transform: uppercase;
     border-radius: 25px;
     display: inline-block;
+    border: none;
 }
 
 .custom-button:hover {
