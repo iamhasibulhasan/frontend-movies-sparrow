@@ -1,0 +1,76 @@
+/* 
+    ==============================================
+                        Main CSS
+    ==============================================
+*/
+
+.add-movie-sec .title,
+.add-blog-sec .title {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px dashed #11326f;
+}
+
+.add-movies-right-widget,
+.add-blogs-right-widget {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+}
+
+.add-movies-right-widget .movie-poster,
+.add-blogs-right-widget .blog-poster {
+    height: auto;
+    background-color: #001232;
+}
+
+.add-movies-right-widget #movie-poster,
+.add-movies-right-widget #movie-banner,
+.add-blogs-right-widget #blog-poster {
+    display: none;
+}
+
+.add-movies-right-widget .movie-poster label img,
+.add-blogs-right-widget .blog-poster label img {
+    width: 100%;
+}
+
+.add-movies-form input,
+.add-movies-form textarea,
+.add-blogs-form input,
+.add-blogs-form textarea {
+    height: 40px;
+    border: none;
+    border-bottom: 1px solid #11326f;
+    border-radius: 0;
+    padding: 0;
+    font-size: 14px;
+    background: transparent;
+    width: 100%;
+    outline: none;
+    color: white;
+    overflow: visible;
+    margin-bottom: 50px;
+}
+
+.add-movies-form input:focus,
+.add-movies-form textarea:focus,
+.add-blogs-form input:focus,
+.add-blogs-form textarea:focus {
+    background: transparent;
+    box-shadow: none;
+    color: white;
+}
+
+.add-movies-form input[type='submit'],
+.add-blogs-form input[type='submit'] {
+    width: auto;
+    padding: 0 40px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    -webkit-transition: all ease 0.3s;
+    transition: all ease 0.3s;
+    background-image: -webkit-linear-gradient(169deg, #5560ff 17%, #aa52a1 63%, #ff4343 100%);
+}
