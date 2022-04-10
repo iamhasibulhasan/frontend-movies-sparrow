@@ -19,6 +19,7 @@ import MovieTicketPlan from "./components/MovieTicketPlan/MovieTicketPlan";
 import MovieSeatPlan from "./components/MovieSeatPlan/MovieSeatPlan";
 import CheckOut from './components/Auth/CheckOut/CheckOut';
 import Dashboard from './components/Auth/Dashboard/Dashboard/Dashboard';
+import PrivateRoute from './components/Auth/PrivateRoute/PrivateRoute';
 
 function App() {
   return (
@@ -77,9 +78,9 @@ function App() {
             <CheckOut></CheckOut>
             <Footer></Footer>
           </Route>
-          <Route path='/dashboard/:slug'>
+          <PrivateRoute path='/dashboard/:slug'>
             <Dashboard></Dashboard>
-          </Route>
+          </PrivateRoute>
 
 
 

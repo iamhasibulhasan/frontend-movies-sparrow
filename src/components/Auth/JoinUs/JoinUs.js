@@ -1,9 +1,27 @@
 import React from 'react';
 import './JoinUs.css';
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
+import useAuth from './../../../hooks/useAuth';
 
 const JoinUs = () => {
+    const { signInUsingGoogle, user } = useAuth();
+    const location = useLocation();
+    const history = useHistory();
+    const redirect_url = location.state?.from || '/';
+
+
+    if (user.email) {
+        history.push('/')
+    }
+    // Google login
+    const handleGoogleLogin = () => {
+        signInUsingGoogle()
+            .then(result => {
+                history.push(redirect_url);
+            })
+    }
+
     return (
         <div className="account-section bg_img" data-background="https://i.ibb.co/dcY3yQy/account-bg.jpg" style={{ backgroundImage: `url(${'https://i.ibb.co/dcY3yQy/account-bg.jpg'})` }}>
             <div className="container">
@@ -37,7 +55,7 @@ const JoinUs = () => {
                         <div className="or"><span>Or</span></div>
                         <ul className="social-icons">
                             <li>
-                                <a href="#0" className="">
+                                <a onClick={handleGoogleLogin} href="#0" className="">
                                     <FaGoogle />
                                 </a>
                             </li>
