@@ -63,21 +63,21 @@ function App() {
             <MoviesDetails></MoviesDetails>
             <Footer></Footer>
           </Route>
-          <Route path='/movie-ticket-plan'>
+          <PrivateRoute path='/movie-ticket-plan'>
             <Header></Header>
             <MovieTicketPlan></MovieTicketPlan>
             <Footer></Footer>
-          </Route>
-          <Route path='/movie-seat-plan'>
+          </PrivateRoute>
+          <PrivateRoute path='/movie-seat-plan'>
             <Header></Header>
             <MovieSeatPlan></MovieSeatPlan>
             <Footer></Footer>
-          </Route>
-          <Route path='/checkout'>
+          </PrivateRoute>
+          <PrivateRoute path='/checkout'>
             <Header></Header>
             <CheckOut></CheckOut>
             <Footer></Footer>
-          </Route>
+          </PrivateRoute>
           <PrivateRoute path='/dashboard/:slug'>
             <Dashboard></Dashboard>
           </PrivateRoute>

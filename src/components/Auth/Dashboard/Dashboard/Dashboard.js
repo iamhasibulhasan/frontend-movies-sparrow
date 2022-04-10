@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import './Dashboard.css';
-import { BsSpeedometer2, BsBasket3 } from "react-icons/bs";
+import { BsSpeedometer2, BsBasket3, BsListCheck } from "react-icons/bs";
 import { BiMovie, BiEdit } from "react-icons/bi";
+import { MdLocalMovies } from "react-icons/md";
 import { FaBlog } from "react-icons/fa";
 import MyOrders from './../MyOrders/MyOrders';
 import ManageOrders from './../ManageOrders/ManageOrders';
@@ -10,14 +11,12 @@ import AddMovies from './../AddMovies/AddMovies';
 import AddBlogs from './../AddBlogs/AddBlogs';
 import { GiTicket } from "react-icons/gi";
 import { Link, useParams } from 'react-router-dom';
+import useAuth from './../../../../hooks/useAuth';
+import AllMovies from './../AllMovies/AllMovies';
+import AllBlogs from '../AllBlogs/AllBlogs';
 
 const Dashboard = () => {
-    const [active, setActive] = useState();
-
-    const handleContent = (e, active) => {
-        setActive(active);
-        e.preventDefault();
-    }
+    const { user } = useAuth();
 
     const { slug } = useParams();
     console.log(slug);
@@ -45,8 +44,14 @@ const Dashboard = () => {
                         <Link as={Link} to='/dashboard/addmovies'>
                             <li className={slug === 'addmovies' ? 'active' : ''}> <BiMovie /> <span>Add Movies</span> </li>
                         </Link>
+                        <Link as={Link} to='/dashboard/allmovies'>
+                            <li className={slug === 'allmovies' ? 'active' : ''}> <MdLocalMovies /> <span>Movies List</span> </li>
+                        </Link>
                         <Link as={Link} to='/dashboard/addblogs'>
                             <li className={slug === 'addblogs' ? 'active' : ''}> <FaBlog /> <span>Add Blogs</span> </li>
+                        </Link>
+                        <Link as={Link} to='/dashboard/allblogs'>
+                            <li className={slug === 'allblogs' ? 'active' : ''}> <BsListCheck /> <span>All Blogs</span> </li>
                         </Link>
 
 
@@ -56,7 +61,7 @@ const Dashboard = () => {
                     {
                         slug === 'admin' ?
                             <div>
-                                <h5 className='mb-4'>Welcome Hasibul Hasan !!</h5>
+                                <h5 className='mb-4'>Welcome {user.displayName} !!</h5>
                                 <div className="row justify-content-evenly">
                                     <div className="col-lg-3 total-sec card">
                                         <div className="card-body">
@@ -102,7 +107,13 @@ const Dashboard = () => {
                                     <ManageOrders></ManageOrders> :
                                     slug === 'addmovies' ?
                                         <AddMovies></AddMovies> :
-                                        <AddBlogs></AddBlogs>
+                                        slug === 'allmovies' ?
+                                            <AllMovies></AllMovies> :
+                                            slug === 'addblogs' ?
+                                                <AddBlogs></AddBlogs> :
+                                                slug === 'allblogs' ?
+                                                    <AllBlogs></AllBlogs> : ''
+
 
                     }
                 </div>

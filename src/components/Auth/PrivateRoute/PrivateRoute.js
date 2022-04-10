@@ -1,4 +1,5 @@
 import React from 'react';
+import './PrivateRoute.css';
 import { Spinner } from 'react-bootstrap';
 import { Redirect } from 'react-router-dom';
 import { Route } from 'react-router-dom';
@@ -10,7 +11,7 @@ const PrivateRoute = ({ children, ...rest }) => {
 
     const spin = () => {
         if (isLoading) {
-            return <div>
+            return <div className='spinner-div'>
                 <Spinner animation="border" variant="primary" />
             </div>
         }

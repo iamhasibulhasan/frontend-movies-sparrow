@@ -1,10 +1,14 @@
 import React from 'react';
 import './DashboardHeader.css';
-import { Navbar, NavDropdown, Nav } from 'react-bootstrap';
+import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FaSignOutAlt } from "react-icons/fa";
+import useAuth from './../../../../hooks/useAuth';
 
 const DashboardHeader = () => {
+    const { logOut, user } = useAuth();
+
+
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky='top' className='dashboard-header'>
 
@@ -14,10 +18,10 @@ const DashboardHeader = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ms-auto dashboard-link align-items-center">
-                    <Nav.Link as={Link} to="/dashboard" className='profile-picture' title='My Profile'>
-                        <img src="https://i.ibb.co/88pXx3C/hasibul.jpg" alt="" />
+                    <Nav.Link as={Link} to="/dashboard/admin" className='profile-picture' title='My Profile'>
+                        <img src={user.photoURL} alt="" />
                     </Nav.Link>
-                    <Nav.Link as={Link} to="#features" title='Logout'><FaSignOutAlt /></Nav.Link>
+                    <Nav.Link as={Link} onClick={logOut} title='Logout'><FaSignOutAlt /></Nav.Link>
 
                 </Nav>
             </Navbar.Collapse>
