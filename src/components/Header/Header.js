@@ -30,9 +30,13 @@ const Header = () => {
                             <Nav.Link as={Link} className="nav-link-header" to="/about-us">About Us</Nav.Link>
                             <Nav.Link as={Link} className="nav-link-header" to="/blogs">Blogs</Nav.Link>
                             <NavDropdown title="Orders" className="nav-link-header" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} className="nav-link-header" to="/my-orders">My Orders</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} className="nav-link-header" to="/manage-orders">Manage Orders</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} className="nav-link-header" to="/add-movies">Add Movies</NavDropdown.Item>
+                                <NavDropdown.Item as={Link} className="nav-link-header" to="/dashboard/myorders">My Orders</NavDropdown.Item>
+
+                                <NavDropdown.Item as={Link} className="nav-link-header" to="/dashboard/manageorders">Manage Orders</NavDropdown.Item>
+
+                                <NavDropdown.Item as={Link} className="nav-link-header" to="/dashboard/addmovies">Add Movies</NavDropdown.Item>
+
+                                <NavDropdown.Item as={Link} className="nav-link-header" to="/dashboard/addblogs">Add Blogs</NavDropdown.Item>
                             </NavDropdown>
                             <Link to="/join-us" className='join-us-btn'>Join Us</Link>
                         </Nav>
