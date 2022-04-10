@@ -36,7 +36,7 @@ const Header = () => {
                             <Nav.Link as={Link} className="nav-link-header" to="/blogs">Blogs</Nav.Link>
 
                             {
-                                user.email ? <NavDropdown title={user.displayName} className="nav-link-header" id="basic-nav-dropdown">
+                                user.email ? <NavDropdown title={user.displayName || user.email} className="nav-link-header nav-link-user-name" id="basic-nav-dropdown">
 
                                     <NavDropdown.Item as={Link} className="nav-link-header" to="/dashboard/admin">Dashboard</NavDropdown.Item>
 

@@ -61,7 +61,7 @@ const Dashboard = () => {
                     {
                         slug === 'admin' ?
                             <div>
-                                <h5 className='mb-4'>Welcome {user.displayName} !!</h5>
+                                <h5 className='mb-4'>Welcome {user.displayName || user.email} !!</h5>
                                 <div className="row justify-content-evenly">
                                     <div className="col-lg-3 total-sec card">
                                         <div className="card-body">
