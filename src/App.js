@@ -77,7 +77,7 @@ function App() {
             <CheckOut></CheckOut>
             <Footer></Footer>
           </Route>
-          <Route path='/dashboard'>
+          <Route path='/dashboard/:slug'>
             <Dashboard></Dashboard>
           </Route>
 

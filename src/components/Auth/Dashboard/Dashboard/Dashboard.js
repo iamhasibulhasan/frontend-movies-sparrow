@@ -9,14 +9,19 @@ import ManageOrders from './../ManageOrders/ManageOrders';
 import AddMovies from './../AddMovies/AddMovies';
 import AddBlogs from './../AddBlogs/AddBlogs';
 import { GiTicket } from "react-icons/gi";
+import { Link, useParams } from 'react-router-dom';
 
 const Dashboard = () => {
-    const [active, setActive] = useState('dashboard');
+    const [active, setActive] = useState();
 
     const handleContent = (e, active) => {
         setActive(active);
         e.preventDefault();
     }
+
+    const { slug } = useParams();
+    console.log(slug);
+    // setActive(slug);
 
 
 
@@ -26,26 +31,30 @@ const Dashboard = () => {
             <div className="row">
                 <div className="col-lg-2 col-sm-2 dashboard-sidebar">
                     <ul>
-                        <a onClick={(e) => handleContent(e, 'dashboard')} href="#0">
-                            <li className={active === 'dashboard' ? 'active' : ''}><BsSpeedometer2 /> <span>Dashboard</span> </li>
-                        </a>
-                        <a onClick={(e) => handleContent(e, 'myorders')} href="#0">
-                            <li className={active === 'myorders' ? 'active' : ''}> <BsBasket3 /> <span>My Orders</span> </li>
-                        </a>
-                        <a onClick={(e) => handleContent(e, 'manageorders')} href="#0">
-                            <li className={active === 'manageorders' ? 'active' : ''}> <BiEdit /> <span>Manage Orders</span> </li>
-                        </a>
-                        <a onClick={(e) => handleContent(e, 'addmovies')} href="#0">
-                            <li className={active === 'addmovies' ? 'active' : ''}> <BiMovie /> <span>Add Movies</span> </li>
-                        </a>
-                        <a onClick={(e) => handleContent(e, 'addblogs')} href="#0">
-                            <li className={active === 'addblogs' ? 'active' : ''}> <FaBlog /> <span>Add Blogs</span> </li>
-                        </a>
+
+                        <Link to='/dashboard/admin'>
+                            <li className={slug === 'admin' ? 'active' : ''}><BsSpeedometer2 /> <span>Dashboard</span> </li>
+                        </Link>
+
+                        <Link to='/dashboard/myorders'>
+                            <li className={slug === 'myorders' ? 'active' : ''}> <BsBasket3 /> <span>My Orders</span> </li>
+                        </Link>
+                        <Link as={Link} to='/dashboard/manageorders'>
+                            <li className={slug === 'manageorders' ? 'active' : ''}> <BiEdit /> <span>Manage Orders</span> </li>
+                        </Link>
+                        <Link as={Link} to='/dashboard/addmovies'>
+                            <li className={slug === 'addmovies' ? 'active' : ''}> <BiMovie /> <span>Add Movies</span> </li>
+                        </Link>
+                        <Link as={Link} to='/dashboard/addblogs'>
+                            <li className={slug === 'addblogs' ? 'active' : ''}> <FaBlog /> <span>Add Blogs</span> </li>
+                        </Link>
+
+
                     </ul>
                 </div>
                 <div className="col-lg-10 col-sm-10 dashboard-main-section">
                     {
-                        active === 'dashboard' ?
+                        slug === 'admin' ?
                             <div>
                                 <h5 className='mb-4'>Welcome Hasibul Hasan !!</h5>
                                 <div className="row justify-content-evenly">
@@ -87,11 +96,11 @@ const Dashboard = () => {
                                     </div>
                                 </div>
                             </div> :
-                            active === 'myorders' ?
+                            slug === 'myorders' ?
                                 <MyOrders></MyOrders> :
-                                active === 'manageorders' ?
+                                slug === 'manageorders' ?
                                     <ManageOrders></ManageOrders> :
-                                    active === 'addmovies' ?
+                                    slug === 'addmovies' ?
                                         <AddMovies></AddMovies> :
                                         <AddBlogs></AddBlogs>
 
