@@ -31,7 +31,7 @@ const Footer = () => {
             <div className="container">
                 <div className="footer-top">
                     <div className="logo">
-                        <a href="index-1.html">
+                        <a href="#0">
                             <img src="https://i.ibb.co/z6BMYGx/logo-sparrow.png" alt="footer" />
                         </a>
                     </div>

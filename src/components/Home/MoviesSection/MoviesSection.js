@@ -97,7 +97,7 @@ const MoviesSection = () => {
                             <div className="row mb-30-none justify-content-center">
 
                                 {
-                                    movies.map(movie => <div key={movie._id} className="col-sm-6 col-lg-4">
+                                    movies.slice(0, 3).map(movie => <div key={movie._id} className="col-sm-6 col-lg-4">
                                     <div className="movie-grid">
                                         <div className="movie-thumb c-thumb">
                                                 <Link to={`/movies-details/${movie._id}`}>
