@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesSection.css';
+import useFunction from './../../../hooks/useFunction';
+import { Link } from 'react-router-dom';
 
 const MoviesSection = () => {
+    const { http } = useFunction();
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        http.get('/movies')
+            .then(res => setMovies(res.data))
+    }, []);
+
+    // console.log(movies);
     return (
         <section className="movie-section padding-top padding-bottom bg-two">
             <div className="container">
@@ -81,19 +92,21 @@ const MoviesSection = () => {
                         <div className="article-section padding-bottom">
                             <div className="section-header-1">
                                 <h2 className="title">movies</h2>
-                                <a className="view-all" href="movie-grid.html">View All</a>
+                                <Link className="view-all" to="/movies">View All</Link>
                             </div>
                             <div className="row mb-30-none justify-content-center">
-                                <div className="col-sm-6 col-lg-4">
+
+                                {
+                                    movies.map(movie => <div key={movie._id} className="col-sm-6 col-lg-4">
                                     <div className="movie-grid">
                                         <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/r5BCQfQ/movie01.jpg" alt="movie" />
-                                            </a>
+                                                <Link to={`/movies-details/${movie._id}`}>
+                                                    <img src={movie.moviePoster} alt="movie" />
+                                                </Link>
                                         </div>
                                         <div className="movie-content bg-one">
                                             <h5 className="title m-0">
-                                                <a href="#0">alone</a>
+                                                    <Link to={`/movies-details/${movie._id}`}>{movie.movieName}</Link>
                                             </h5>
                                             <ul className="movie-rating-percent">
                                                 <li>
@@ -111,69 +124,14 @@ const MoviesSection = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="movie-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/SyrdDKT/movie02.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">mars</a>
-                                            </h5>
-                                            <ul className="movie-rating-percent">
-                                                <li>
-                                                    <div className="thumb">
-                                                        <img src="https://i.ibb.co/P1vfm9x/tomato.png" alt="movie" />
-                                                    </div>
-                                                    <span className="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div className="thumb">
-                                                        <img src="https://i.ibb.co/h9Tn0CG/cake.png" alt="movie" />
-                                                    </div>
-                                                    <span className="content">88%</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="movie-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/5kH9SBK/movie03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">venus</a>
-                                            </h5>
-                                            <ul className="movie-rating-percent">
-                                                <li>
-                                                    <div className="thumb">
-                                                        <img src="https://i.ibb.co/P1vfm9x/tomato.png" alt="movie" />
-                                                    </div>
-                                                    <span className="content">88%</span>
-                                                </li>
-                                                <li>
-                                                    <div className="thumb">
-                                                        <img src="https://i.ibb.co/h9Tn0CG/cake.png" alt="movie" />
-                                                    </div>
-                                                    <span className="content">88%</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>)
+                                }
                             </div>
                         </div>
                         <div className="article-section padding-bottom">
                             <div className="section-header-1">
                                 <h2 className="title">events</h2>
-                                <a className="view-all" href="events.html">View All</a>
+                                <Link className="view-all" to="/movies">View All</Link>
                             </div>
                             <div className="row mb-30-none justify-content-center">
                                 <div className="col-sm-6 col-lg-4">
@@ -244,7 +202,7 @@ const MoviesSection = () => {
                         <div className="article-section">
                             <div className="section-header-1">
                                 <h2 className="title">sports</h2>
-                                <a className="view-all" href="sports.html">View All</a>
+                                <Link className="view-all" to="/movies">View All</Link>
                             </div>
                             <div className="row mb-30-none justify-content-center">
                                 <div className="col-sm-6 col-lg-4">

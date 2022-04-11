@@ -58,7 +58,7 @@ function App() {
             <Movies></Movies>
             <Footer></Footer>
           </Route>
-          <Route path='/movies-details'>
+          <Route path='/movies-details/:id'>
             <Header></Header>
             <MoviesDetails></MoviesDetails>
             <Footer></Footer>

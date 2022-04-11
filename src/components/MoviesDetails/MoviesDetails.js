@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MoviesDetails.css';
 import { FaFacebookF, FaGithubAlt, FaHackerrank, FaInstagram, FaLinkedinIn, FaCalendarAlt, FaRegClock, FaHeart, FaCheck, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
-
 import "odometer/themes/odometer-theme-default.css";
 import Slider from "react-slick";
+import useFunction from './../../hooks/useFunction';
+import { useParams } from 'react-router-dom';
 
 const MoviesDetails = () => {
+    const { http } = useFunction();
     let [active, setActive] = useState('summery');
+    const [movie, setMovie] = useState([]);
+    const { id } = useParams();
+    console.log(id);
 
+    // Handle Show Summery
+    const handleShowSummeryReview = (e, active) => {
+
+        setActive(active);
+        e.preventDefault();
+    }
+
+    // Get Single Movie From MongoDB
+
+    useEffect(() => {
+        http.get('/movie/' + id)
+            .then(res => setMovie(res.data))
+    }, []);
+
+    console.log(movie);
 
 
     // Odometer
@@ -54,41 +74,34 @@ const MoviesDetails = () => {
         ]
     };
 
-    // Handle Show Summery
-    const handleShowSummeryReview = (e, active) => {
-
-        setActive(active);
-        e.preventDefault();
-    }
 
 
     return (
         <div>
-            <div className="details-banner bg_img" data-background="https://i.ibb.co/nb1Ngk7/banner03.jpg" style={{ backgroundImage: `url(${'https://i.ibb.co/nb1Ngk7/banner03.jpg'})` }}>
+            <div className="details-banner bg_img" data-background={movie.movieBanner} style={{ backgroundImage: `url(${movie.movieBanner})` }}>
                 <div className="container">
                     <div className="details-banner-wrapper">
                         <div className="details-banner-thumb">
-                            <img src="https://i.ibb.co/5kH9SBK/movie03.jpg" alt="movie" />
+                            <img src={movie.moviePoster} alt="movie" />
                             <a href="https://www.youtube.com/embed/KGeBMAgc46E" className="video-popup">
                                 <img src="https://i.ibb.co/sqNmHny/video-button.png" alt="movie" />
                             </a>
                         </div>
                         <div className="details-banner-content offset-lg-3">
-                            <h3 className="title">Venus</h3>
+                            <h3 className="title">{movie.movieName}</h3>
                             <div className="tags">
-                                <a href="#0">English</a>
-                                <a href="#0">Hindi</a>
-                                <a href="#0">Telegu</a>
-                                <a href="#0">Tamil</a>
+                                {
+                                    movie.language?.split(',').map(lan => <a href="#0">{lan}</a>)
+                                }
                             </div>
-                            <a href="#0" className="button">horror</a>
+                            <a href="#0" className="button">{movie.category}</a>
                             <div className="social-and-duration">
                                 <div className="duration-area">
                                     <div className="item">
-                                        <FaCalendarAlt className='icon-i' /><span>06 Dec, 2020</span>
+                                        <FaCalendarAlt className='icon-i' /><span>{movie.showing}</span>
                                     </div>
                                     <div className="item">
-                                        <FaRegClock className='icon-i' /><span>2 hrs 50 mins</span>
+                                        <FaRegClock className='icon-i' /><span>{movie.duration}</span>
                                     </div>
                                 </div>
                                 <ul className="social-share">
@@ -172,15 +185,11 @@ const MoviesDetails = () => {
                         <div className="col-lg-3 col-sm-10 col-md-6 mb-50">
                             <div className="widget-1 widget-tags">
                                 <ul>
-                                    <li>
-                                        <a href="#0">2D</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">imax 2D</a>
-                                    </li>
-                                    <li>
-                                        <a href="#0">4DX</a>
-                                    </li>
+                                    {
+                                        movie.dimension?.split(',').map(din => <li>
+                                            <a href="#0">{din}</a>
+                                        </li>)
+                                    }
                                 </ul>
                             </div>
                             <div className="widget-1 widget-offer">
@@ -240,33 +249,17 @@ const MoviesDetails = () => {
                                         speed={500}
                                         arrows={false}
                                         slidesToShow={3}
+                                        infinite={true}
                                         {...settings}
                                     >
-                                        <div class="thumb">
-                                            <a href="./assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="http://pixner.net/boleto/demo/assets/images/movie/movie-details03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div class="thumb">
-                                            <a href="./assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="http://pixner.net/boleto/demo/assets/images/movie/movie-details03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div class="thumb">
-                                            <a href="./assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="http://pixner.net/boleto/demo/assets/images/movie/movie-details03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div class="thumb">
-                                            <a href="./assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="http://pixner.net/boleto/demo/assets/images/movie/movie-details03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
-                                        <div class="thumb">
-                                            <a href="./assets/images/movie/movie-details03.jpg" class="img-pop">
-                                                <img src="http://pixner.net/boleto/demo/assets/images/movie/movie-details03.jpg" alt="movie" />
-                                            </a>
-                                        </div>
+
+                                        {
+                                            movie.movieSlider?.split(',').map(simg => <div className="thumb">
+                                                <a href={simg} className="img-pop">
+                                                    <img src={simg} alt="movie" />
+                                                </a>
+                                            </div>)
+                                        }
                                     </Slider>
 
 
@@ -286,7 +279,7 @@ const MoviesDetails = () => {
                                             <div className={active === "summery" ? "tab-item active" : "tab-item"}>
                                                 <div className="item">
                                                     <h5 className="sub-title">Synopsis</h5>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vehicula eros sit amet est tincidunt aliquet. Fusce laoreet ligula ac ultrices eleifend. Donec hendrerit fringilla odio, ut feugiat mi convallis nec. Fusce elit ex, blandit vitae mattis sit amet, iaculis ac elit. Ut diam mauris, viverra sit amet dictum vel, aliquam ac quam. Ut mi nisl, fringilla sit amet erat et, convallis porttitor ligula. Sed auctor, orci id luctus venenatis, dui dolor euismod risus, et pharetra orci lectus quis sapien. Duis blandit ipsum ac consectetur scelerisque. </p>
+                                                    <p>{movie.description} </p>
                                                 </div>
                                                 <div className="item">
                                                     <div className="header">
@@ -294,7 +287,7 @@ const MoviesDetails = () => {
                                                     </div>
 
 
-                                                    <div class="casting-slider">
+                                                    <div className="casting-slider">
 
                                                         <Slider
                                                             speed={200}
@@ -303,70 +296,21 @@ const MoviesDetails = () => {
                                                             {...settings}
 
                                                         >
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
+                                                            {
+                                                                movie.castImg?.split(",").map(cast => <div className="cast-item">
+                                                                    <div className="cast-thumb">
                                                                     <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
+                                                                            <img src={cast} alt="cast" />
                                                                     </a>
                                                                 </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
+                                                                    <div className="cast-content">
+                                                                        <h6 className="cast-title"><a href="#0">Bill Hader</a></h6>
+                                                                        <span className="cate">actor</span>
                                                                     <p>As raven</p>
                                                                 </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-                                                                    <p>As raven</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-                                                                    <p>As raven</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-                                                                    <p>As raven</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-                                                                    <p>As raven</p>
-                                                                </div>
-                                                            </div>
+                                                                </div>)
+                                                            }
                                                         </Slider>
-
-
-
                                                     </div>
 
 
@@ -376,7 +320,7 @@ const MoviesDetails = () => {
                                                     <div className="header">
                                                         <h5 className="sub-title">crew</h5>
                                                     </div>
-                                                    <div class="casting-slider">
+                                                    <div className="casting-slider">
 
                                                         <Slider
                                                             speed={400}
@@ -385,66 +329,21 @@ const MoviesDetails = () => {
                                                             {...settings}
 
                                                         >
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
+                                                            {
+                                                                movie.crewImg?.split(',').map(crew => <div className="cast-item">
+                                                                    <div className="cast-thumb">
                                                                     <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
+                                                                            <img src={crew} alt="cast" />
                                                                     </a>
                                                                 </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
+                                                                    <div className="cast-content">
+                                                                        <h6 className="cast-title"><a href="#0">Bill Hader</a></h6>
+                                                                        <span className="cate">actor</span>
 
                                                                 </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
+                                                                </div>)
+                                                            }
 
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-
-                                                                </div>
-                                                            </div>
-                                                            <div class="cast-item">
-                                                                <div class="cast-thumb">
-                                                                    <a href="#0">
-                                                                        <img src="	http://pixner.net/boleto/demo/assets/images/cast/cast01.jpg" alt="cast" />
-                                                                    </a>
-                                                                </div>
-                                                                <div class="cast-content">
-                                                                    <h6 class="cast-title"><a href="#0">Bill Hader</a></h6>
-                                                                    <span class="cate">actor</span>
-
-                                                                </div>
-                                                            </div>
                                                         </Slider>
                                                     </div>
                                                 </div>

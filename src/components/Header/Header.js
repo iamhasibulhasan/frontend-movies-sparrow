@@ -7,7 +7,7 @@ import { FaSignOutAlt } from "react-icons/fa";
 
 const Header = () => {
     const { user, logOut } = useAuth();
-    console.log(user);
+    // console.log(user);
 
     window.onscroll = () => {
         let element = document.getElementById("header");
