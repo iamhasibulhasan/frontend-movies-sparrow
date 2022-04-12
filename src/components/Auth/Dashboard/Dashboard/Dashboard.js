@@ -19,8 +19,6 @@ const Dashboard = () => {
     const { user } = useAuth();
 
     const { slug } = useParams();
-    console.log(slug);
-    // setActive(slug);
 
 
 

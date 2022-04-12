@@ -21,7 +21,7 @@ const DashboardHeader = () => {
                     <Nav.Link as={Link} to="/dashboard/admin" className='profile-picture' title='My Profile'>
                         <img src={user.photoURL || 'https://i.ibb.co/9bD2Qj2/149071.png'} alt="" />
                     </Nav.Link>
-                    <Nav.Link as={Link} onClick={logOut} title='Logout'><FaSignOutAlt /></Nav.Link>
+                    <Nav.Link as={Link} to='' onClick={logOut} title='Logout'><FaSignOutAlt /></Nav.Link>
 
                 </Nav>
             </Navbar.Collapse>

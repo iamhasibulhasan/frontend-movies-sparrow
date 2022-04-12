@@ -1,82 +1,103 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './AllMovies.css';
-import { Badge } from 'react-bootstrap';
 import { BsTrash, BsPencilSquare } from "react-icons/bs";
+import useFunction from './../../../../hooks/useFunction';
+import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const AllMovies = () => {
+    const { http } = useFunction();
+    const [movies, setMovies] = useState([]);
+
+    useEffect(() => {
+        http.get('./movies')
+            .then(res => {
+                setMovies(res.data.movies);
+            })
+    }, []);
+
+
+    // Movie Delete route
+    const handleDelete = (e, id) => {
+        e.preventDefault();
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                // Api called
+                http.delete('/movie/' + id)
+                    .then(res => {
+                        console.log(res.data.deletedCount);
+
+                        if (res.data.deletedCount == 1) {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Your work has been saved',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        } else {
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'error',
+                                title: 'Movie data not found.',
+                                text: 'Please try again.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    })
+
+
+
+            }
+        })
+
+    }
+
+
+
     return (
         <div className='all-movie-list-sec'>
             <h5 className='mb-4'>Manage All Movies</h5>
             <table className='table table-dark table-hover'>
                 <thead>
                     <tr>
-                        <td>#SI</td>
-                        <td>Movie Name</td>
-                        <td>Type</td>
-                        <td>Price</td>
-                        <td>Status</td>
-                        <td>Action</td>
+                        <th>#SI</th>
+                        <th>Movie Name</th>
+                        <th>Type</th>
+                        <th>Ticket Price</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    <tr>
-                        <td>1</td>
-                        <td>Harry Potter</td>
-                        <td>Mystery</td>
-                        <td>200</td>
-                        <td>
-                            <Badge bg="success">Active</Badge>
-                        </td>
+                    {
+                        movies.map((movie, index) => <tr
+                            key={movie._id}
+                        >
+                            <td>{index + 1}</td>
+                            <td>{movie.movieName}</td>
+                            <td>{movie.category}</td>
+                            <td>$ {movie.ticketPrice}</td>
                         <td className='d-flex gap-2'>
                             <a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>
-                            <a href="#0" className='btn btn-danger btn-sm'><BsTrash /></a>
+                                <Link to='' onClick={(e) => handleDelete(e, movie._id)} className='btn btn-danger btn-sm'><BsTrash /></Link>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>Hobbit Ring</td>
-                        <td>Adventure</td>
-                        <td>500</td>
-                        <td>
-                            <Badge bg="danger">Inactive</Badge>
-                        </td>
-                        <td className='d-flex gap-2'>
-                            <a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>
-                            <a href="#0" className='btn btn-danger btn-sm'><BsTrash /></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>3</td>
-                        <td>Agnee 2</td>
-                        <td>Action</td>
-                        <td>800</td>
-                        <td>
-                            <Badge bg="success">Active</Badge>
-                        </td>
-                        <td className='d-flex gap-2'>
-                            <a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>
-                            <a href="#0" className='btn btn-danger btn-sm'><BsTrash /></a>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>4</td>
-                        <td>Alone</td>
-                        <td>Horror</td>
-                        <td>300</td>
-                        <td>
-                            <Badge bg="success">Active</Badge>
-                        </td>
-                        <td className='d-flex gap-2'>
-                            <a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>
-                            <a href="#0" className='btn btn-danger btn-sm'><BsTrash /></a>
-                        </td>
-                    </tr>
-
-
+                        </tr>)
+                    }
 
                 </tbody>
             </table>
