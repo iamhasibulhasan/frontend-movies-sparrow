@@ -6,10 +6,11 @@ import { Link } from 'react-router-dom';
 const MoviesSection = () => {
     const { http } = useFunction();
     const [movies, setMovies] = useState([]);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
     useEffect(() => {
         http.get('/movies')
-            .then(res => setMovies(res.data))
+            .then(res => setMovies(res.data.movies))
     }, []);
 
     // console.log(movies);
@@ -130,144 +131,64 @@ const MoviesSection = () => {
                         </div>
                         <div className="article-section padding-bottom">
                             <div className="section-header-1">
-                                <h2 className="title">events</h2>
+                                <h2 className="title">Sci-Fi</h2>
                                 <Link className="view-all" to="/movies">View All</Link>
                             </div>
                             <div className="row mb-30-none justify-content-center">
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="event-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/mbT20vP/event01.jpg" alt="event" />
-                                            </a>
-                                            <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
+                                {
+                                    movies.filter(m => m.category.toLowerCase() === 'sci-fi').slice(0, 3).map(movie => <div className="col-sm-6 col-lg-4">
+                                        <div className="event-grid">
+                                            <div className="movie-thumb c-thumb">
+                                                <Link to={`/movies-details/${movie._id}`}>
+                                                    <img src={movie.moviePoster} alt="event" />
+                                                </Link>
+                                                <div className="event-date">
+                                                    <h6 className="date-title">{new Date(movie.showing).getDate()}</h6>
+                                                    <span>{months[new Date(movie.showing).getMonth()]}</span>
+                                                </div>
+                                            </div>
+                                            <div className="movie-content bg-one">
+                                                <h5 className="title m-0">
+                                                    <Link to={`/movies-details/${movie._id}`}>{movie.movieName}</Link>
+                                                </h5>
+                                                <div className="movie-rating-percent">
+                                                    <span>{movie.category} || {movie.dimension}</span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">Digital Economy Conference 2020</a>
-                                            </h5>
-                                            <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="event-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/6J2MfmK/event02.jpg" alt="event" />
-                                            </a>
-                                            <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
-                                            </div>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">web design conference 2020</a>
-                                            </h5>
-                                            <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="event-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/XZbWNG1/event03.jpg" alt="event" />
-                                            </a>
-                                            <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
-                                            </div>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">digital thinkers meetup</a>
-                                            </h5>
-                                            <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>)
+                                }
                             </div>
                         </div>
                         <div className="article-section">
                             <div className="section-header-1">
-                                <h2 className="title">sports</h2>
+                                <h2 className="title">Animation</h2>
                                 <Link className="view-all" to="/movies">View All</Link>
                             </div>
                             <div className="row mb-30-none justify-content-center">
-                                <div className="col-sm-6 col-lg-4">
+                                {
+                                    movies.filter(m => m.category.toLowerCase() === 'animation').slice(0, 3).map(movie => <div className="col-sm-6 col-lg-4">
                                     <div className="sports-grid">
                                         <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/SxZmtfw/sports01.jpg" alt="sports" />
-                                            </a>
+                                                <Link to={`/movies-details/${movie._id}`}>
+                                                    <img src={movie.moviePoster} alt="sports" />
+                                                </Link>
                                             <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
-                                            </div>
+                                                    <h6 className="date-title">{new Date(movie.showing).getDate()}</h6>
+                                                    <span>{months[new Date(movie.showing).getMonth()]}</span>
+                                                </div>
                                         </div>
                                         <div className="movie-content bg-one">
                                             <h5 className="title m-0">
-                                                <a href="#0">football league tournament</a>
+                                                    <Link to={`/movies-details/${movie._id}`}>{movie.movieName}</Link>
                                             </h5>
                                             <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
+                                                    <span>{movie.category} || {movie.dimension}</span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="sports-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/zGw4WRX/sports02.jpg" alt="sports" />
-                                            </a>
-                                            <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
-                                            </div>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">world cricket league 2020</a>
-                                            </h5>
-                                            <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-sm-6 col-lg-4">
-                                    <div className="sports-grid">
-                                        <div className="movie-thumb c-thumb">
-                                            <a href="#0">
-                                                <img src="https://i.ibb.co/ct98RgJ/sports03.jpg" alt="sports" />
-                                            </a>
-                                            <div className="event-date">
-                                                <h6 className="date-title">28</h6>
-                                                <span>Dec</span>
-                                            </div>
-                                        </div>
-                                        <div className="movie-content bg-one">
-                                            <h5 className="title m-0">
-                                                <a href="#0">basket ball tournament 2020</a>
-                                            </h5>
-                                            <div className="movie-rating-percent">
-                                                <span>327 Montague Street</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>)
+                                }
                             </div>
                         </div>
                     </div>

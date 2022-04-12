@@ -272,6 +272,7 @@ h6 {
 .event-grid .movie-thumb .event-date,
 .movie-grid .movie-thumb .event-date {
     background-image: -webkit-linear-gradient(45deg, #f54646 0%, #f53da1 100%);
+    text-align: center;
 }
 
 .sports-grid .movie-thumb .event-date .date-title,

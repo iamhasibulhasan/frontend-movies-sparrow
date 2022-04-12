@@ -2,10 +2,11 @@ import React from 'react';
 import './AddMovies.css';
 import { useForm } from "react-hook-form";
 import useFunction from './../../../../hooks/useFunction';
+import Swal from 'sweetalert2'
 
 const AddMovies = () => {
     const { http } = useFunction();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
     const onSubmit = data => {
         console.log(data);
@@ -13,7 +14,27 @@ const AddMovies = () => {
         http.post('/addMovie', {
             ...data
         }).then(res => {
-            console.log(res.data);
+
+            if (res.data.insertedId) {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Movie posted successful',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                reset();
+            } else {
+                Swal.fire({
+                    toast: true,
+                    position: 'top-end',
+                    icon: 'error',
+                    title: 'Movie posted unsuccessful',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
         })
 
     };

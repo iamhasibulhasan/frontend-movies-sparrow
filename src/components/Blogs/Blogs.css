@@ -282,6 +282,10 @@ article {
 }
 
 .pagination-area a {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    line-height: 42px;
     color: #7a89bb;
     margin: 0 15px;
     display: inline-block;
@@ -298,12 +302,8 @@ article {
 }
 
 .pagination-area a.active {
-    width: 42px;
-    height: 42px;
     text-align: center;
-    line-height: 42px;
     background: -webkit-linear-gradient(169deg, #5560ff 0%, #ff4343 100%);
-    border-radius: 50%;
     color: #ffffff;
 }
 

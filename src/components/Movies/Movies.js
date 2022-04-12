@@ -8,13 +8,25 @@ import { Link } from 'react-router-dom';
 const Movies = () => {
     const { http } = useFunction();
     const [movies, setMovies] = useState([]);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(12);
+    const [pageCount, setPageCount] = useState(0);
+
+    const showMovies = (e) => {
+        setSize(e.target.value);
+    }
 
     // Get All Movies From MongoDB
     useEffect(() => {
-        http.get('/movies')
-            .then(res => setMovies(res.data))
-    }, []);
-    console.log(movies);
+        http.get(`/movies?page=${page}&&size=${size}`)
+            .then(res => {
+                const count = res.data.count;
+                setMovies(res.data.movies);
+                const pageNumber = Math.ceil(count / size);
+                setPageCount(pageNumber);
+            });
+
+    }, [page, size]);
 
     return (
         <div>
@@ -145,13 +157,13 @@ const Movies = () => {
 
 
 
-                                                <select className="nice-select select-bar list" tabIndex="0">
+                                                <select onChange={(e) => showMovies(e)} className="nice-select select-bar list" tabIndex="0">
 
-                                                    <option data-value="12" className="option selected">12</option>
-                                                    <option data-value="15" className="option">15</option>
-                                                    <option data-value="18" className="option">18</option>
-                                                    <option data-value="21" className="option">21</option>
-                                                    <option data-value="30" className="option">30</option>
+                                                    <option value="12" className="option selected">12</option>
+                                                    <option value="15" className="option">15</option>
+                                                    <option value="18" className="option">18</option>
+                                                    <option value="21" className="option">21</option>
+                                                    <option value="30" className="option">30</option>
 
                                                 </select>
 
@@ -186,7 +198,7 @@ const Movies = () => {
                                         <div className="row mb-10 justify-content-center">
 
                                             {
-                                                movies.map(movie => <div className="col-sm-6 col-lg-4">
+                                                movies.map(movie => <div key={movie._id} className="col-sm-6 col-lg-4">
 
                                                     <div className="movie-grid">
                                                         <div className="movie-thumb c-thumb">
@@ -228,11 +240,13 @@ const Movies = () => {
 
                                 <div className="pagination-area text-center">
                                     <a href="#0">&#171;<span>Prev</span></a>
-                                    <a href="#0">1</a>
-                                    <a href="#0">2</a>
-                                    <a href="#0" className="active">3</a>
-                                    <a href="#0">4</a>
-                                    <a href="#0">5</a>
+                                    {
+                                        [...Array(pageCount).keys()].map(num => <a
+                                            key={num}
+                                            onClick={() => setPage(num)}
+                                            className={num === page ? 'active' : ''}
+                                            href="#0">{num}</a>)
+                                    }
                                     <a href="#0"><span>Next</span>&#187;</a>
                                 </div>
 
