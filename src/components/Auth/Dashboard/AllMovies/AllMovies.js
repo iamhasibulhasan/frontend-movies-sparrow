@@ -4,6 +4,7 @@ import { BsTrash, BsPencilSquare } from "react-icons/bs";
 import useFunction from './../../../../hooks/useFunction';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import DataTable, { createTheme } from 'react-data-table-component';
 
 const AllMovies = () => {
     const { http } = useFunction();
@@ -17,9 +18,62 @@ const AllMovies = () => {
     }, []);
 
 
+    // Data table
+    const columns = [
+        {
+            name: 'Movie Name',
+            selector: row => row.movieName,
+        },
+        {
+            name: 'Type',
+            selector: row => row.category,
+        },
+        {
+            name: 'Ticket Price',
+            selector: row => '$ ' + row.ticketPrice,
+        },
+        {
+            name: 'Action',
+            selector: row => <span><a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>  <Link to='' onClick={(e) => handleDelete(e, row._id)} className='btn btn-danger btn-sm'><BsTrash /></Link></span>,
+
+
+        }
+    ];
+
+
+    createTheme('solarized', {
+        text: {
+            primary: '#268bd2',
+            secondary: '#2aa198',
+        },
+        background: {
+            default: '#032055',
+        },
+        context: {
+            background: '#cb4b16',
+            text: '#FFFFFF',
+        },
+        divider: {
+            default: '#073642',
+        },
+        action: {
+            button: 'rgba(0,0,0,.54)',
+            hover: 'rgba(0,0,0,.08)',
+            disabled: 'rgba(0,0,0,.12)',
+        },
+    }, 'dark');
+
+
+
+
+
+
+    // Data table ends
+
     // Movie Delete route
     const handleDelete = (e, id) => {
         e.preventDefault();
+        // console.log(id);
         Swal.fire({
             toast: true,
             position: 'top-end',
@@ -71,36 +125,22 @@ const AllMovies = () => {
 
     return (
         <div className='all-movie-list-sec'>
-            <h5 className='mb-4'>Manage All Movies</h5>
-            <table className='table table-dark table-hover'>
-                <thead>
-                    <tr>
-                        <th>#SI</th>
-                        <th>Movie Name</th>
-                        <th>Type</th>
-                        <th>Ticket Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {
-                        movies.map((movie, index) => <tr
-                            key={movie._id}
-                        >
-                            <td>{index + 1}</td>
-                            <td>{movie.movieName}</td>
-                            <td>{movie.category}</td>
-                            <td>$ {movie.ticketPrice}</td>
-                        <td className='d-flex gap-2'>
-                            <a href="#0" className='btn btn-warning btn-sm'><BsPencilSquare /></a>
-                                <Link to='' onClick={(e) => handleDelete(e, movie._id)} className='btn btn-danger btn-sm'><BsTrash /></Link>
-                        </td>
-                        </tr>)
-                    }
-
-                </tbody>
-            </table>
+            <div className="dataTable">
+                <DataTable
+                    title='All Movies List'
+                    columns={columns}
+                    data={movies}
+                    pointerOnHover
+                    theme="solarized"
+                    direction="auto"
+                    fixedHeader
+                    fixedHeaderScrollHeight="300px"
+                    highlightOnHover
+                    pagination
+                    persistTableHead
+                    responsive
+                />
+            </div>
         </div>
     );
 };
