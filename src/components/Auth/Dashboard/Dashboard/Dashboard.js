@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardHeader from '../DashboardHeader/DashboardHeader';
 import './Dashboard.css';
 import { BsSpeedometer2, BsBasket3, BsListCheck } from "react-icons/bs";
@@ -14,12 +14,21 @@ import { Link, useParams } from 'react-router-dom';
 import useAuth from './../../../../hooks/useAuth';
 import AllMovies from './../AllMovies/AllMovies';
 import AllBlogs from '../AllBlogs/AllBlogs';
+import useFunction from './../../../../hooks/useFunction';
 
 const Dashboard = () => {
     const { user } = useAuth();
-
     const { slug } = useParams();
+    const { http } = useFunction();
+    const [count, setCount] = useState([]);
 
+    useEffect(() => {
+        http.get('/collection-count')
+            .then(res => {
+                // console.log(res.data);
+                setCount(res.data);
+            })
+    }, []);
 
 
     return (
@@ -74,7 +83,7 @@ const Dashboard = () => {
                                         <div className="card-body">
                                             <div className="widget-flex">
                                                 <BiMovie className='main-sec-icon micon' />
-                                                <b>5000</b>
+                                                <b>{count.movieCount}</b>
                                             </div><br />
                                             <span>Total Movies</span>
                                         </div>
