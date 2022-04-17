@@ -113,7 +113,7 @@ const AllMovies = () => {
                                 toast: true,
                                 position: 'top-end',
                                 icon: 'success',
-                                title: 'Your work has been saved',
+                                title: 'Deleted successful',
                                 showConfirmButton: false,
                                 timer: 1500
                             })

@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Blogs.css';
 import { Link } from 'react-router-dom';
 import { FaAngleDoubleRight } from "react-icons/fa";
 import { FaFacebookF, FaGithubAlt, FaHackerrank, FaInstagram, FaLinkedinIn, FaComments, FaEye, FaSearch } from "react-icons/fa";
+import useFunction from './../../hooks/useFunction';
 
 const Blogs = () => {
+    const { http } = useFunction();
+    const [blogs, setBlogs] = useState([]);
+    const [page, setPage] = useState(0);
+    const [size, setSize] = useState(5);
+    const [pageCount, setPageCount] = useState(0);
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+
+    useEffect(() => {
+        http.get(`/blogs?page=${page}&&size=${size}`)
+            .then(res => {
+                const count = res.data.count;
+                setBlogs(res.data.blogs);
+                const pageNumber = Math.ceil(count / size);
+                setPageCount(pageNumber);
+            });
+
+    }, [page, size]);
+
+
+
     return (
         <div>
             <div className="main-page-header speaker-banner bg_img" data-background="https://i.ibb.co/F0rVdhg/banner07.jpg" style={{ backgroundImage: `url(${'https://i.ibb.co/F0rVdhg/banner07.jpg'})` }}>
@@ -29,18 +52,19 @@ const Blogs = () => {
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-8 mb-50 mb-lg-0">
-                            <article>
+                            {
+                                blogs.map(blog => <article key={blog._id}>
                                 <div className="post-item">
                                     <div className="post-thumb">
                                         <a href="blog-details.html">
-                                            <img src="https://i.ibb.co/svsZsNv/blog01.jpg" alt="blog" />
+                                                <img src={blog.blogPoster} alt="blog" />
                                         </a>
                                     </div>
                                     <div className="post-content">
                                         <div className="post-header">
                                             <h4 className="title">
                                                 <a href="blog-details.html">
-                                                    Increase Event Ticket Sales For Film Production With the Right Advertising Strategies
+                                                        {blog.blogTitle}
                                                 </a>
                                             </h4>
                                             <div className="meta-post">
@@ -48,32 +72,38 @@ const Blogs = () => {
                                                 <a href="#0"><i><FaEye></FaEye></i>466 View</a>
                                             </div>
                                             <p>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ac cursus leo. Nullam dolor nunc, hendrerit non velit id, pharetra viverra elit.
+                                                    {blog.description}
                                             </p>
                                         </div>
                                         <div className="entry-content">
                                             <div className="left">
-                                                <span className="date">Dece 15, 2020 BY </span>
+                                                    <span className="date">{
+                                                        months[new Date(blog.postDate).getMonth()] + ', ' + new Date(blog.postDate).getDate() + " " + new Date(blog.postDate).getFullYear()
+                                                    } BY </span>
                                                 <div className="authors">
                                                     <div className="thumb">
-                                                        <a href="#0"><img src="https://i.ibb.co/CQBVZJZ/author.jpg" alt="#0" /></a>
+                                                            <a href="#0"><img src={blog.authorImg} alt="#0" /></a>
                                                     </div>
-                                                    <h6 className="title"><a href="#0">Alvin Mcdaniel</a></h6>
+                                                        <h6 className="title"><a href="#0">{blog.author}</a></h6>
                                                 </div>
                                             </div>
                                             <a href="#0" className="buttons">Read More <i className="flaticon-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
-                            </article>
+                                </article>)
+                            }
+
 
                             <div className="pagination-area text-center">
                                 <a href="#0">&#171;<span>Prev</span></a>
-                                <a href="#0">1</a>
-                                <a href="#0">2</a>
-                                <a href="#0" className="active">3</a>
-                                <a href="#0">4</a>
-                                <a href="#0">5</a>
+                                {
+                                    [...Array(pageCount).keys()].map(num => <a
+                                        key={num}
+                                        onClick={() => setPage(num)}
+                                        className={num === page ? 'active' : ''}
+                                        href="#0">{num}</a>)
+                                }
                                 <a href="#0"><span>Next</span>&#187;</a>
                             </div>
 
