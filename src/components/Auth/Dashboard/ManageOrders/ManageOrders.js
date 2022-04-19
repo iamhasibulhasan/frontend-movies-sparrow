@@ -60,7 +60,7 @@ const ManageOrders = () => {
     // Order Delete route
     const handleDelete = (e, id) => {
         e.preventDefault();
-        console.log(id);
+        // console.log(id);
 
         Swal.fire({
             toast: true,
