@@ -79,7 +79,7 @@ const CheckOut = () => {
                     imageAlt: 'Custom image',
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        history.push('/');
+                        history.push('/dashboard/myorders');
                     }
                 })
             })
