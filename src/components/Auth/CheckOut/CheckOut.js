@@ -63,7 +63,12 @@ const CheckOut = () => {
                 phone,
                 movieId: movie._id,
                 movieName: movie.movieName,
-                totalPrice
+                movieHall: hallCity,
+                dimension: dimension,
+                showTime: showTime,
+                totalPrice,
+                seat: 'D11, D12',
+                status: 0
             }).then(res => {
                 Swal.fire({
                     title: 'Successfully Booked Ticket!!',
