@@ -4,14 +4,18 @@ import { FaFacebookF, FaGithubAlt, FaHackerrank, FaInstagram, FaLinkedinIn, FaCa
 import "odometer/themes/odometer-theme-default.css";
 import Slider from "react-slick";
 import useFunction from './../../hooks/useFunction';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import useAuth from './../../hooks/useAuth';
 
 const MoviesDetails = () => {
-    const { http } = useFunction();
+    const history = useHistory();
+    const { user } = useAuth();
+    const { http, setCart } = useFunction();
     let [active, setActive] = useState('summery');
     const [movie, setMovie] = useState([]);
     const { id } = useParams();
-    console.log(id);
+
 
     // Handle Show Summery
     const handleShowSummeryReview = (e, active) => {
@@ -20,6 +24,7 @@ const MoviesDetails = () => {
         e.preventDefault();
     }
 
+
     // Get Single Movie From MongoDB
 
     useEffect(() => {
@@ -27,7 +32,14 @@ const MoviesDetails = () => {
             .then(res => setMovie(res.data))
     }, []);
 
-    console.log(movie);
+    // Book ticket in session storage
+
+    const handleBookTicket = () => {
+        setCart(movie, user)
+        history.push(`/movie-ticket-plan/${movie.movieName}`);
+    }
+
+
 
 
     // Odometer
@@ -173,7 +185,7 @@ const MoviesDetails = () => {
                                 <p><a href="#0">Rate It</a></p>
                             </div>
                         </div>
-                        <a href="#0" className="custom-button">book tickets</a>
+                        <Link onClick={handleBookTicket} className="custom-button">book tickets</Link>
                     </div>
                 </div>
             </div>

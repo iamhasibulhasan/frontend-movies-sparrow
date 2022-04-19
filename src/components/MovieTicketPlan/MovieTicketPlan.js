@@ -1,31 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './MovieTicketPlan.css';
 import { FaHeart, FaMapMarkerAlt, FaAngleRight } from "react-icons/fa";
 import { BiX } from "react-icons/bi";
 import { Link } from 'react-router-dom';
+import useFunction from './../../hooks/useFunction';
 
 const MovieTicketPlan = () => {
+    const { movie, setOrder } = useFunction();
     const [active, setActive] = useState('');
+    const [dimension, setDimension] = useState('2D');
+    const [hallCity, setHallCity] = useState('Dhaka');
 
-
-
+    const handleDimension = (e) => {
+        setDimension(e.target.value);
+    }
+    const handleHallCity = (e) => {
+        setHallCity(e.target.value);
+    }
 
     const showTicketPopup = (e, active) => {
         setActive(active);
+        setOrder(dimension, hallCity, e.target.innerText);
         e.preventDefault();
     }
+
     return (
         <div>
-            <div className="details-banner hero-area bg_img" data-background="https://i.ibb.co/nb1Ngk7/banner03.jpg" style={{ backgroundImage: `url(${'https://i.ibb.co/nb1Ngk7/banner03.jpg'})` }}>
+            <div className="details-banner hero-area bg_img" data-background={movie.movieBanner} style={{ backgroundImage: `url(${movie.movieBanner})` }}>
                 <div className="container">
                     <div className="details-banner-wrapper">
                         <div className="details-banner-content">
-                            <h3 className="title">Venus</h3>
+                            <h3 className="title">{movie.movieName}</h3>
                             <div className="tags">
-                                <a href="#0">English</a>
-                                <a href="#0">Hindi</a>
-                                <a href="#0">Telegu</a>
-                                <a href="#0">Tamil</a>
+                                {
+                                    movie.language?.split(',').map(lan => <a href="#0">{lan}</a>)
+                                }
                             </div>
                         </div>
                     </div>
@@ -41,8 +50,8 @@ const MovieTicketPlan = () => {
                                 <img src="https://i.ibb.co/kgL1mCS/city.png" alt="ticket" />
                             </div>
                             <span className="type">city</span>
-                            <select className="nice-select select-bar" tabIndex="0">
-                                <option value="London" className="option selected">London</option>
+                            <select onChange={handleHallCity} className="nice-select select-bar" tabIndex="0">
+                                <option value="London" className="option">London</option>
                                 <option value="Dhaka" className="option">Dhaka</option>
                                 <option value="Rosario" className="option">Rosario</option>
                                 <option value="Madrid" className="option">Madrid</option>
@@ -57,10 +66,10 @@ const MovieTicketPlan = () => {
                             </div>
                             <span className="type">date</span>
                             <select className="nice-select select-bar" tabIndex="0">
-                                <option value="23/10/2020" className="option selected">23/10/2020</option>
-                                <option value="24/10/2020" className="option">24/10/2020</option>
-                                <option value="25/10/2020" className="option">25/10/2020</option>
-                                <option value="26/10/2020" className="option">26/10/2020</option>
+                                {
+                                    <option value={movie.showing} className="option">{movie.showing}</option>
+
+                                }
                             </select>
                         </div>
                         <div className="form-group">
@@ -69,13 +78,8 @@ const MovieTicketPlan = () => {
                             </div>
                             <span className="type">cinema</span>
                             <select className="nice-select select-bar" tabIndex="0">
-                                <option value="Harry Potter" className="selected focus list pb-5">Harry Potter</option>
-                                <option value="Hunger Game" className="list">Hunger Game</option>
-                                <option value="Joker" className="list">Joker</option>
-                                <option value="Suicide Squad" className="list">Suicide Squad</option>
-                                <option value="Ram Lila" className="list">Ram Lila</option>
-                                <option value="Tom Jerry" className="list">Tom Jerry</option>
-                                <option value="Mr. Bean" className="list">Mr. Bean</option>
+                                <option value={movie.movieName} className="selected focus list pb-5">{movie.movieName}</option>
+
                             </select>
                         </div>
                         <div className="form-group">
@@ -83,13 +87,11 @@ const MovieTicketPlan = () => {
                                 <img src="https://i.ibb.co/nwSDvJt/exp.png" alt="ticket" />
                             </div>
                             <span className="type">Experience</span>
-                            <select className="nice-select select-bar" tabIndex="0">
-                                <option value="English-2D" className="option selected">English-2D</option>
-                                <option value="English-3D" className="option">English-3D</option>
-                                <option value="Hindi-2D" className="option">Hindi-2D</option>
-                                <option value="Hindi-3D" className="option">Hindi-3D</option>
-                                <option value="Telegu-2D" className="option">Telegu-2D</option>
-                                <option value="Telegu-3D" className="option">Telegu-3D</option>
+                            <select onChange={handleDimension} className="nice-select select-bar" tabIndex="0">
+                                {
+                                    movie.dimension.split(", ").map(m => <option value={m} className="option selected">{m}</option>)
+
+                                }
                             </select>
                         </div>
                     </form>
@@ -278,7 +280,7 @@ const MovieTicketPlan = () => {
                     <div className="thumb">
                         <img src="https://i.ibb.co/HNVyVWL/seat-plan.png" alt="movie" />
                     </div>
-                    <Link to="/movie-seat-plan" className="custom-button seatPlanButton">Seat Plans<FaAngleRight className='right-arrow' /></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Link to={`/movie-seat-plan/${movie.movieName}`} className="custom-button seatPlanButton">Seat Plans<FaAngleRight className='right-arrow' /></Link>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <a href='#0' onClick={(e) => showTicketPopup(e, 'hide')} className="custom-button seatPlanButton">Close <BiX className='right-arrow' /></a>
                 </div>
             </div>

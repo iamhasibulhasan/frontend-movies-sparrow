@@ -136,7 +136,7 @@ const MoviesSection = () => {
                             </div>
                             <div className="row mb-30-none justify-content-center">
                                 {
-                                    movies.filter(m => m.category.toLowerCase() === 'sci-fi').slice(0, 3).map(movie => <div className="col-sm-6 col-lg-4">
+                                    movies.filter(m => m.category.toLowerCase() === 'sci-fi').slice(0, 3).map(movie => <div key={movie._id} className="col-sm-6 col-lg-4">
                                         <div className="event-grid">
                                             <div className="movie-thumb c-thumb">
                                                 <Link to={`/movies-details/${movie._id}`}>

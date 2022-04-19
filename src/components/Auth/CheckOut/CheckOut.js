@@ -2,9 +2,93 @@ import React from 'react';
 import './CheckOut.css';
 import { BiChevronsLeft } from "react-icons/bi";
 import { FaUserAlt } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import useFunction from './../../../hooks/useFunction';
+import { useState } from 'react';
+import userEvent from '@testing-library/user-event';
+import Swal from 'sweetalert2';
 
 const CheckOut = () => {
+    const history = useHistory();
+    const { user, movie, dimension, hallCity, showTime, http } = useFunction();
+    const [name, setName] = useState(user.displayName);
+    const [email, setEmail] = useState(user.email);
+    const [phone, setPhone] = useState('');
+    let countTicket = 2;
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+    const handleName = (e) => {
+        setName(e.target.value);
+
+    }
+    const handleEmail = (e) => {
+        setEmail(e.target.value);
+
+    }
+    const handlePhone = (e) => {
+        setPhone(e.target.value);
+
+    }
+    let totalPrice = movie.ticketPrice * countTicket + (movie.ticketPrice * countTicket) / 10;
+
+    const handleUserDetails = (e) => {
+        if (name && phone && email) {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                title: "Information saved.",
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else {
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                title: "Information cant be empty.",
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        e.preventDefault();
+    }
+    const handleCheckout = (e) => {
+        if (name && phone) {
+            http.post('/checkout', {
+                uid: user.uid,
+                name,
+                email,
+                phone,
+                movieId: movie._id,
+                movieName: movie.movieName,
+                totalPrice
+            }).then(res => {
+                Swal.fire({
+                    title: 'Successfully Booked Ticket!!',
+                    text: 'Ready to watch the ' + movie.movieName + ' movie.',
+                    imageUrl: movie.movieBanner,
+                    imageWidth: 400,
+                    imageHeight: 200,
+                    imageAlt: 'Custom image',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        history.push('/');
+                    }
+                })
+            })
+        } else {
+            Swal.fire({
+                position: 'center',
+                title: "Name and Phone can't be empty.",
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+        e.preventDefault();
+    }
     return (
         <div>
             {/* Section Header */}
@@ -12,10 +96,10 @@ const CheckOut = () => {
                 <div className="container">
                     <div className="details-banner-wrapper">
                         <div className="details-banner-content style-two">
-                            <h3 className="title">Venus</h3>
+                            <h3 className="title">{movie.movieName}</h3>
                             <div className="tags">
-                                <a href="#0">City Walk</a>
-                                <a href="#0">English - 2D</a>
+                                <a href="#0">{hallCity}</a>
+                                <a href="#0">English - {dimension}</a>
                             </div>
                         </div>
                     </div>
@@ -26,17 +110,19 @@ const CheckOut = () => {
                 <div className="container">
                     <div className="page-title-area">
                         <div className="item md-order-1">
-                            <Link to="/movie-ticket-plan" className="custom-button back-button">
+                            {/* <Link to="/movie-ticket-plan" className="custom-button back-button">
                                 <BiChevronsLeft />back
-                            </Link>
+                            </Link> */}
                         </div>
                         <div className="item date-item">
-                            <span className="date">MON, SEP 09 2020</span>
+                            <span className="date">
+                                {
+                                    months[new Date(movie.showing).getMonth()] + ', ' + new Date(movie.showing).getDate() + " " + new Date(movie.showing).getFullYear()
+                                }
+                            </span>
                             <select className="nice-select select-bar" tabIndex="0">
-                                <option value="09:40" className="option selected">09:40</option>
-                                <option value="13:45" className="option">13:45</option>
-                                <option value="15:45" className="option">15:45</option>
-                                <option value="19:50" className="option">19:50</option>
+                                <option value={showTime} className="option selected">{showTime}</option>
+
                             </select>
                         </div>
                         <div className="item">
@@ -52,7 +138,7 @@ const CheckOut = () => {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="checkout-widget d-flex flex-wrap align-items-center justify-content-between">
+                            {/* <div className="checkout-widget d-flex flex-wrap align-items-center justify-content-between">
                                 <div className="title-area">
                                     <h5 className="title">Already a Sparrow  Member?</h5>
                                     <p>Sign in to earn points and make booking easier!</p>
@@ -60,23 +146,27 @@ const CheckOut = () => {
                                 <a href="#0" className="sign-in-area">
                                     <FaUserAlt className='signin-user' /><span>Sign in</span>
                                 </a>
-                            </div>
+                            </div> */}
                             <div className="checkout-widget checkout-contact">
                                 <h5 className="title">Share your Contact  Details </h5>
-                                <form className="checkout-contact-form">
+
+
+                                <form onSubmit={handleUserDetails} className="checkout-contact-form">
                                     <div className="form-group">
-                                        <input type="text" placeholder="Full Name" />
+                                        <input onChange={handleName} value={name} type="text" placeholder="Full Name" />
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" placeholder="Enter your Mail" />
+                                        <input onChange={handleEmail} value={email} type="text" placeholder="Enter your Mail" />
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" placeholder="Enter your Phone Number " />
+                                        <input onChange={handlePhone} type="text" placeholder="Enter your Phone Number " />
                                     </div>
                                     <div className="form-group">
                                         <input type="submit" value="Continue" className="custom-button" />
                                     </div>
                                 </form>
+
+
                             </div>
                             <div className="checkout-widget checkout-contact">
                                 <h5 className="title">Promo Code </h5>
@@ -159,36 +249,38 @@ const CheckOut = () => {
                                 <h4 className="title">booking summery</h4>
                                 <ul>
                                     <li>
-                                        <h6 className="subtitle">Venus</h6>
-                                        <span className="info">English-2d</span>
+                                        <h6 className="subtitle">{movie.movieName}</h6>
+                                        <span className="info">English-{dimension}</span>
                                     </li>
                                     <li>
-                                        <h6 className="subtitle"><span>City Walk</span><span>02</span></h6>
-                                        <div className="info"><span>10 SEP TUE, 11:00 PM</span> <span>Tickets</span></div>
+                                        <h6 className="subtitle"><span>{hallCity}</span><span>0{countTicket}</span></h6>
+                                        <div className="info"><span>{
+                                            months[new Date(movie.showing).getMonth()] + ', ' + new Date(movie.showing).getDate() + " " + new Date(movie.showing).getFullYear()
+                                        }, {showTime}</span> <span>Tickets</span></div>
                                     </li>
                                     <li>
-                                        <h6 className="subtitle mb-0"><span>Tickets  Price</span><span>$150</span></h6>
+                                        <h6 className="subtitle mb-0"><span>Tickets  Price</span><span>${movie.ticketPrice}</span></h6>
                                     </li>
                                 </ul>
                                 <ul className="side-shape">
-                                    <li>
+                                    {/* <li>
                                         <h6 className="subtitle"><span>combos</span><span>$57</span></h6>
                                         <span className="info"><span>2 Nachos Combo</span></span>
                                     </li>
                                     <li>
                                         <h6 className="subtitle"><span>food &amp; bevarage</span></h6>
-                                    </li>
+                                    </li> */}
                                 </ul>
                                 <ul>
                                     <li>
-                                        <span className="info"><span>price</span><span>$207</span></span>
-                                        <span className="info"><span>vat</span><span>$15</span></span>
+                                        <span className="info"><span>price</span><span>${movie.ticketPrice} x {countTicket}= ${movie.ticketPrice * countTicket}</span></span>
+                                        <span className="info"><span>vat</span><span>${(movie.ticketPrice * countTicket) / 10}</span></span>
                                     </li>
                                 </ul>
                             </div>
                             <div className="proceed-area  text-center">
-                                <h6 className="subtitle"><span>Amount Payable</span><span>$222</span></h6>
-                                <a href="#0" className="custom-button back-button">proceed</a>
+                                <h6 className="subtitle"><span>Amount Payable</span><span>${movie.ticketPrice * countTicket + (movie.ticketPrice * countTicket) / 10}</span></h6>
+                                <Link onClick={handleCheckout} className="custom-button back-button">proceed</Link>
                             </div>
                         </div>
                     </div>

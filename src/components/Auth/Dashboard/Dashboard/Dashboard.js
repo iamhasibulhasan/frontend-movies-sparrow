@@ -101,7 +101,7 @@ const Dashboard = () => {
                                         <div className="card-body">
                                             <div className="widget-flex">
                                                 <FaBlog className='main-sec-icon bicon' />
-                                                <b>5000</b>
+                                                <b>{count.blogCount}</b>
                                             </div><br />
                                             <span>Total Blogs</span>
                                         </div>
