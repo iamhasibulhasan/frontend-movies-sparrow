@@ -43,13 +43,15 @@ const useFunction = () => {
     const [hallCity, setHallCity] = useState(getHallCity());
     const [showTime, setShowTime] = useState(getShowTime());
 
-
+    const saveUser = (user) => {
+        sessionStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
+    }
 
     const setCart = (movie, user) => {
         sessionStorage.setItem('movie', JSON.stringify(movie));
-        sessionStorage.setItem('user', JSON.stringify(user));
         setMovie(movie);
-        setUser(user);
+        saveUser(user);
     }
 
     const setOrder = (dimension, hallCity, showTime) => {
@@ -59,6 +61,17 @@ const useFunction = () => {
         setDimension(dimension);
         setHallCity(hallCity);
         setShowTime(showTime);
+    }
+
+    const clearAuth = () => {
+        sessionStorage.removeItem('user');
+
+    }
+    const clearMovies = () => {
+        sessionStorage.removeItem('movie');
+        sessionStorage.removeItem('dimension');
+        sessionStorage.removeItem('hallCity');
+        sessionStorage.removeItem('showTime');
     }
 
     // Base Url Method
@@ -75,7 +88,10 @@ const useFunction = () => {
         setOrder,
         dimension,
         hallCity,
-        showTime
+        showTime,
+        saveUser,
+        clearAuth,
+        clearMovies
     }
 
 

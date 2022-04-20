@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import useAuth from './../../../hooks/useAuth';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import useFunction from './../../../hooks/useFunction';
 
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
     const location = useLocation();
     const history = useHistory();
     const redirect_url = location.state?.from || '/';
+    const { saveUser } = useFunction();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
 
@@ -23,14 +25,19 @@ const Login = () => {
         signInUsingGoogle()
             .then(result => {
                 history.push(redirect_url);
+                saveUser(result.user);
             })
+
+
     }
     // Email login
     const handleEmailLogin = (data) => {
         signInUsingEmail(data.email, data.password)
             .then(result => {
                 history.push(redirect_url);
+                saveUser(result.user);
             })
+
     }
 
 

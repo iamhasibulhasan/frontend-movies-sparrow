@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 
 const CheckOut = () => {
     const history = useHistory();
-    const { user, movie, dimension, hallCity, showTime, http } = useFunction();
+    const { user, movie, dimension, hallCity, showTime, http, clearMovies } = useFunction();
     const [name, setName] = useState(user.displayName);
     const [email, setEmail] = useState(user.email);
     const [phone, setPhone] = useState('');
@@ -80,6 +80,7 @@ const CheckOut = () => {
                 }).then((result) => {
                     if (result.isConfirmed) {
                         history.push('/dashboard/myorders');
+                        clearMovies();
                     }
                 })
             })

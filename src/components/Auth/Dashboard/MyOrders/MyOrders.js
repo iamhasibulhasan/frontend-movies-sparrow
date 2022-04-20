@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Badge } from 'react-bootstrap';
 import './MyOrders.css';
-import { BsTrash, BsPencilSquare } from "react-icons/bs";
+import { BsTrash } from "react-icons/bs";
 import DataTable, { createTheme } from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -16,7 +16,7 @@ const MyOrders = () => {
             .then(res => {
                 setMovies(res.data);
             })
-    }, []);
+    }, [movies]);
 
     // console.log(movies);
 
@@ -100,7 +100,7 @@ const MyOrders = () => {
         },
         {
             name: 'Action',
-            selector: row => <span><Link to='' onClick={(e) => handleEditOrder(e, row._id)} className='btn btn-warning btn-sm'><BsPencilSquare /></Link>  <Link to='' onClick={(e) => handleDelete(e, row._id)} className='btn btn-danger btn-sm'><BsTrash /></Link></span>,
+            selector: row => <Link to='' onClick={(e) => handleDelete(e, row._id)} className='btn btn-danger btn-sm'><BsTrash /></Link>
 
 
         }

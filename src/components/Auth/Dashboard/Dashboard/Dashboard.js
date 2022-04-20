@@ -92,7 +92,7 @@ const Dashboard = () => {
                                         <div className="card-body">
                                             <div className="widget-flex">
                                                 <GiTicket className='main-sec-icon ticon' />
-                                                <b>5000</b>
+                                                <b>{count.orderCount}</b>
                                             </div><br />
                                             <span>Sell Tickets</span>
                                         </div>

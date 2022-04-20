@@ -1,11 +1,13 @@
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "firebase/auth";
 import initializeAuthentication from './../firebase/firebase.init';
 import { useState, useEffect } from 'react';
+import useFunction from './useFunction';
 
 
 initializeAuthentication();
 
 const useFirebase = () => {
+    const { clearAuth } = useFunction();
     const auth = getAuth();
     const [user, setUser] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -47,9 +49,11 @@ const useFirebase = () => {
         setIsLoading(true);
         signOut(auth)
             .then(() => {
+                clearAuth();
 
             })
             .finally(() => setIsLoading(false));
+
     }
 
     return {

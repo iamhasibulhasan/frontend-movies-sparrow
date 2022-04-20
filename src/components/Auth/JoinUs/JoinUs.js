@@ -4,12 +4,14 @@ import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from './../../../hooks/useAuth';
 import { useForm } from "react-hook-form";
+import useFunction from './../../../hooks/useFunction';
 
 const JoinUs = () => {
     const { signInUsingGoogle, user, signUpUsingEmail } = useAuth();
     const location = useLocation();
     const history = useHistory();
     const redirect_url = location.state?.from || '/';
+    const { saveUser } = useFunction();
 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -26,6 +28,7 @@ const JoinUs = () => {
         signInUsingGoogle()
             .then(result => {
                 history.push(redirect_url);
+                saveUser(result.user);
             })
     }
 
@@ -36,6 +39,7 @@ const JoinUs = () => {
         signUpUsingEmail(data.email, data.password)
             .then(result => {
                 history.push(redirect_url);
+                saveUser(result.user);
             })
     }
 
