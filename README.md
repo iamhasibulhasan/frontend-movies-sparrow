@@ -1,5 +1,5 @@
 <p align="center">
-   <a href="#">
+   <a href="https://movies-sparrow.web.app/">
          <img width="30%"  src="https://i.ibb.co/z6BMYGx/logo-sparrow.png">
    </a>
 </p>
@@ -19,7 +19,12 @@
 ```
 ### Live site :blush:
 ```
-https://example.com/
+https://movies-sparrow.web.app/
+```
+
+### Server Repository
+```
+https://github.com/iamhasibulhasan/backend-movies-sparrow
 ```
 
 ### Using Tech
@@ -29,7 +34,7 @@ https://example.com/
 3.  React Bootstrap
 4.  Sweet Alert 2
 5.  React Font Awesome
-6.  
+6.  Axios etc
 ```
 
 ### All rights reserved by [Hasibul Hasan](https://hasibul-hasan.netlify.app/)
