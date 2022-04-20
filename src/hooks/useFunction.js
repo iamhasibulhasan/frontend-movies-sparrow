@@ -76,7 +76,7 @@ const useFunction = () => {
 
     // Base Url Method
     const http = axios.create({
-        baseURL: 'http://localhost:5000',
+        baseURL: 'https://infinite-wave-25951.herokuapp.com/',
     });
 
 
