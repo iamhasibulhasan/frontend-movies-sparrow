@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Login.css';
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import useAuth from './../../../hooks/useAuth';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import useFunction from './../../../hooks/useFunction';
+import { Alert } from 'react-bootstrap';
 
 
 const Login = () => {
@@ -14,7 +15,8 @@ const Login = () => {
     const history = useHistory();
     const redirect_url = location.state?.from || '/';
     const { saveUser } = useFunction();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const [firebaseError, setFirebaseError] = useState('');
 
 
     if (user.email) {
@@ -26,6 +28,7 @@ const Login = () => {
             .then(result => {
                 history.push(redirect_url);
                 saveUser(result.user);
+
             })
 
 
@@ -36,7 +39,12 @@ const Login = () => {
             .then(result => {
                 history.push(redirect_url);
                 saveUser(result.user);
-            })
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setFirebaseError(error.message);
+            });
 
     }
 
@@ -51,6 +59,8 @@ const Login = () => {
                             <h2 className="title">welcome back</h2>
                         </div>
                         <form className="account-form" onSubmit={handleSubmit(handleEmailLogin)}>
+                            {firebaseError ? <Alert variant="danger">{firebaseError}</Alert> : ''}
+
                             <div className="form-group">
                                 <label htmlFor="email2">Email<span>*</span></label>&nbsp;{errors.email && <span style={{ color: 'red' }}>This field is required</span>}
                                 <input type="text" placeholder="Enter Your Email" id="email2"{...register("email", { required: true })} />

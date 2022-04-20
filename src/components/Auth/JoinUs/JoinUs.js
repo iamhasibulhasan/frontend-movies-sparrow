@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './JoinUs.css';
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import useAuth from './../../../hooks/useAuth';
 import { useForm } from "react-hook-form";
 import useFunction from './../../../hooks/useFunction';
+import { Alert } from 'react-bootstrap';
 
 const JoinUs = () => {
     const { signInUsingGoogle, user, signUpUsingEmail } = useAuth();
@@ -13,7 +14,7 @@ const JoinUs = () => {
     const redirect_url = location.state?.from || '/';
     const { saveUser } = useFunction();
 
-
+    const [firebaseError, setFirebaseError] = useState('');
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
 
@@ -40,7 +41,11 @@ const JoinUs = () => {
             .then(result => {
                 history.push(redirect_url);
                 saveUser(result.user);
-            })
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                setFirebaseError(error.message);
+            });
     }
 
     return (
@@ -53,6 +58,7 @@ const JoinUs = () => {
                             <h2 className="title">to Sparrow </h2>
                         </div>
                         <form className="account-form" onSubmit={handleSubmit(handleEmailSignUp)}>
+                            {firebaseError ? <Alert variant="danger">{firebaseError}</Alert> : ''}
                             <div className="form-group">
                                 <label htmlFor="email1">Email<span style={{ color: 'red' }}> *</span></label>&nbsp;{errors.email && <span style={{ color: 'red' }}>This field is required</span>}
                                 <input type="text" placeholder="Enter Your Email" id="email1" {...register("email", { required: true })} />
